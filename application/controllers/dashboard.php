@@ -5,6 +5,8 @@ class Dashboard extends CI_Controller
     {
         parent::__construct();
         $this->load->model('employee_model');
+        $this->load->model('Schedule_model');
+        $this->load->model('user_model');
         if(!$this->session->userdata('user'))
         redirect('login');
     }
@@ -13,7 +15,14 @@ class Dashboard extends CI_Controller
         $role = $this->session->userdata('role_id');
         if($role == 4 || $role == 3)
         {
-            $data['sicks'] = $this->employee_model->sicks();
+			$schedulesData = $this->Schedule_model->getAllSchedules();
+
+            $data['schedules'] = $schedulesData['data'];
+            $data['totalSchedules'] = $schedulesData['total'];
+			$data['totalSchedulesToday'] = $schedulesData['totalToday'];
+			$data['totalSchedulesThisWeek'] = $schedulesData['totalThisWeek'];
+            $data['totalUsers'] = $this->user_model->getTotalCount();
+
             $this->load->view('templates/admin_header');
             $this->load->view('dashboard/admin_dash',$data);
             $this->load->view('templates/Footer');

@@ -1,52 +1,75 @@
 <?php
 class Schedule_model extends CI_Model
 {
-    public function __construct()
-    {
-        parent:: __construct();
-        $this->table = 'health';
-    }
+	public function __construct()
+	{
+		parent::__construct();
+		$this->table = 'health';
+	}
 
-    public function rows()
-    {
-        $this->db->select('*');
-        $this->db->from('health');
-        $this->db->join('Schedule', 'Schedule.sch_id = Schedule.Sch_id');
-        $this->db->join('illness', 'illness.ill_id = health.ill_id');
-        $query = $this->db->get();
-        return $query->result();
-    }
-    public function row($emp_id)
-    {
-        $where = array(
-            'sch_id'         =>$sched_id
-        );
-        $query = $this->db->get_where($this->table,$where);
-        return $query->row();
-    }
-    public function add($data)
-    {
-       $this->db->insert($this->table, $data);
-        return true;
-    }
+	public function getAllSchedules()
+	{
+		$this->db->select('schedules.*, members.*'); // Select fields from both tables
+		$this->db->from('schedules');
+		$this->db->join('members', 'schedules.member_id = members.id', 'left'); // Join with members
+		$this->db->group_by('schedules.id'); // Group by schedule ID to avoid duplicates
+		$query = $this->db->get();
 
-    public function sicks()
-    {
-        $this->db->select('*');
-        $this->db->from('Schedule');
-        $this->db->join('Schedule', 'Schedule.sch_id = Schedule.sch_id');
-        $this->db->join('Schedule', 'Schedule.sch_id = schedule.sch_id');
-        $this->db->where('health.is_sick = 1');
-        $query = $this->db->get();
-        return $query->result();
-    }
-    public function cure($Schedule_id,$data)
-    {
-        $where = array(
-            'is_sick' =>1,
-            'sch_id'         =>$sch_id
-        );
-        return $this->db->update($this->table,$data,$where);
-    }
+		$result = $query->result(); // Get the actual data
+		$totalCount = $query->num_rows(); // Get the total count
 
+		// Calculate totals for today and this week
+		$totalToday = $this->getSchedulesForToday();
+		$totalThisWeek = $this->getSchedulesForWeek();
+
+		return [
+			'data' => $result,
+			'total' => $totalCount,
+			'totalToday' => $totalToday,
+			'totalThisWeek' => $totalThisWeek,
+		];
+	}
+
+
+	public function getSchedulesForToday()
+	{
+		$this->db->where('DATE(date_from)', date('Y-m-d'));
+		return $this->db->count_all_results('schedules');
+	}
+
+	public function getSchedulesForWeek()
+	{
+		$this->db->where('DATE(date_from) >= CURDATE() - INTERVAL WEEKDAY(CURDATE()) DAY');
+		$this->db->where('DATE(date_to) <= CURDATE() + INTERVAL (6 - WEEKDAY(CURDATE())) DAY');
+		return $this->db->count_all_results('schedules');
+	}
+
+
+	public function getSchedule($sch_id)
+	{
+		$this->db->where('sch_id', $sch_id);
+		$query = $this->db->get('Schedule');
+		return $query->row();
+	}
+
+	public function addSchedule($data)
+	{
+		return $this->db->insert('Schedule', $data);
+	}
+
+	public function getSickSchedules()
+	{
+		$this->db->select('Schedule.sch_id, Schedule.fname, Schedule.lname, Schedule.mname, Schedule.address, Schedule.contact');
+		$this->db->from('Schedule');
+		$this->db->join('health', 'health.sch_id = Schedule.sch_id');
+		$this->db->where('health.is_sick', 1);
+		$query = $this->db->get();
+		return $query->result();
+	}
+
+	public function updateCure($sch_id, $data)
+	{
+		$this->db->where('sch_id', $sch_id);
+		return $this->db->update('health', $data);
+	}
 }

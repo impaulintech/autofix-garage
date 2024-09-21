@@ -60,4 +60,10 @@ class User_model extends CI_Model
         return $this->db->update($this->table,$data,$where);
     }
 
+    public function getTotalCount()
+    {
+        $this->db->where('is_deleted', 0);
+        return $this->db->count_all_results($this->table);
+    }
+
 }

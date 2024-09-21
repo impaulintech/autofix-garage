@@ -57,3 +57,5 @@ $route['translate_uri_dashes'] = FALSE;
 $route['admin'] = '/admin'; 
 $route['admin/login'] = '/login/admin_login';
 $route['admin/dashboard'] = '/admin/dashboard';
+
+$route['api/schedules'] = 'ScheduleApi/index';

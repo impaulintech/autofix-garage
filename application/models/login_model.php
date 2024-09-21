@@ -21,20 +21,17 @@ class login_model extends CI_Model
 
 	public function is_admin($username, $password)
 	{
-		// Query the users table to find the matching username
 		$this->db->where('username', $username);
 		$query = $this->db->get('users');
 
-		// Check if there's a result
 		if ($query->num_rows() == 1) {
-			$user = $query->row_array(); // Get the user data
+			$user = $query->row_array();
 
-			// Verify the hashed password
 			if ($password === $user['password']) {
-				return $user['type'] == 1; // Return true if user is admin (type = 1)
+				return $user['type'] == 1;
 			}
-		}
 
-		return false; // Return false if username not found or password mismatch
+			return false;
+		}
 	}
 }

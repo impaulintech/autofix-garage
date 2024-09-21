@@ -44,7 +44,7 @@ if (
                 <?php echo $this->session->flashdata('error'); ?>
             </div>
         <?php endif; ?>
-        <form action="<?= site_url('admin/login') ?>" method="post">
+        <form action="<?= site_url('login/login') ?>" method="post">
             <div class="mb-4">
                 <label for="username" class="block text-gray-600">Username:</label>
                 <input type="text" name="username" required class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-300">

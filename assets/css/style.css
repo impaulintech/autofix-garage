@@ -1,0 +1,138 @@
+/* login */
+/* .login-form input[type="text"] {
+	font-size: 16px;
+	padding: 10px 10px 10px 5px;
+	width: 200px;
+	border: none;
+	border-bottom: 1px solid #515151;
+	background: transparent;
+}
+
+.login-form input[type="password"] {
+	font-size: 16px;
+	padding: 10px 10px 10px 5px;
+	width: 200px;
+	border: none;
+	border-bottom: 1px solid #515151;
+	background: transparent;
+}
+
+.login-form input[type="text"]:focus {
+	border-color: #007bff;
+	box-shadow: 0 0 0 0.3rem rgba(0, 123, 255, 0.25);
+}
+.login-form input[type="password"]:focus {
+	border-color: #007bff;
+	box-shadow: 0 0 0 0.3rem rgba(0, 123, 255, 0.25);
+}
+.login-form {
+	position: relative;
+	top: 150px;
+	height: 100%;
+} */
+/* navbar */
+.navbar-nav a {
+	display: inline-block;
+	margin: 0px;
+	padding: 0px;
+}
+
+.navbar-nav a:hover {
+	border-bottom: 3px solid rgb(255, 255, 255);
+}
+
+/* -----------table---------- */
+.table-list img:hover {
+	transform: scale(1.5);
+}
+/*-------sidebar---------*/
+.sidebar {
+	width: 60px;
+  height: 100%;
+  position: fixed;
+	box-sizing: border-box;
+	padding: 10px;
+	background-color: skyblue;
+	transition: ease-in-out 0.5s;
+	overflow: hidden;
+}
+
+.sidebar:hover {
+	width: 250px;
+}
+
+.sidebar:hover > .item > .text {
+	opacity: 1;
+}
+
+.item {
+	display: flex;
+	margin: 20px 0;
+	padding-left: 10px;
+	padding-top: 7px;
+	text-decoration: none;
+	color: black;
+}
+
+.item .icon {
+	width: 40px;
+	height: 35px;
+	flex-shrink: 0;
+	padding-top: 5px;
+}
+
+.item .text {
+	font-family: tahoma;
+	opacity: 0;
+	transition: ease-in-out 0.3s;
+	transition-delay: 0.2s;
+	margin-left: 5px;
+	white-space: nowrap;
+}
+
+.icon {
+	padding-top: 3px;
+}
+
+.item:hover {
+	background-color: white;
+	border-radius: 5px 5px;
+	text-decoration: none;
+	color: black;
+}
+.sub-item {
+	display: none;
+	margin: 0px;
+	padding: 0px 0px;
+	border-radius: 5px 5px;
+}
+.rotate {
+	transform: rotate(90deg);
+}
+.sidebar .dropdown{
+    transition: 0.3s ease;
+    position: relative;
+    left:30px;
+    bottom: 5px;
+   }
+   
+.sub-item a {
+	font-family: tahoma;
+	margin:0px;
+}
+.sub-item >.item >.text {
+	font-family: tahoma;
+	opacity: 0;
+	transition: ease-in-out 0.3s;
+	transition-delay: 0.2s;
+	margin-left: 5px;
+	white-space: nowrap;
+}
+.sidebar:hover >.sub-item > .item > .text {
+	opacity: 1;
+}
+
+/* Table-List */
+#myTable{
+	margin-top: 50px;
+}

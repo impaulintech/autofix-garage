@@ -126,7 +126,7 @@
 							<div class="small-box bg-danger">
 								<div class="inner text-center">
 									<h3><?= $totalSchedulesThisWeek ?></h3>
-									<p>Total Schedules This Week</p>
+									<p>Schedules This Week</p>
 								</div>
 								<div class="icon">
 									<i class="ion ion-calendar"></i>
@@ -140,7 +140,7 @@
 							<div class="small-box bg-primary">
 								<div class="inner text-center">
 									<h3><?= $totalSchedulesToday ?></h3>
-									<p>Total Schedules Today</p>
+									<p>Schedules Today</p>
 								</div>
 								<div class="icon">
 									<i class="ion ion-calendar"></i>

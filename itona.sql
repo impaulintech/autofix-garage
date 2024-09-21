@@ -109,7 +109,7 @@ DROP TABLE IF EXISTS `members`;
 
 CREATE TABLE `members` (
   `id` int(30) NOT NULL AUTO_INCREMENT,
-  `member_id` int(30) NOT NULL,
+  `user_id` int(30) NOT NULL,
   `firstname` varchar(100) NOT NULL,
   `middlename` varchar(100) NOT NULL,
   `lastname` varchar(100) NOT NULL,
@@ -123,7 +123,7 @@ CREATE TABLE `members` (
 
 /*Data for the table `members` */
 
-insert  into `members`(`id`,`member_id`,`firstname`,`middlename`,`lastname`,`gender`,`contact`,`address`,`email`,`date_created`) values 
+insert  into `members`(`id`,`user_id`,`firstname`,`middlename`,`lastname`,`gender`,`contact`,`address`,`email`,`date_created`) values 
 (5,58487246,'Mike','D','Williams','Male','+14526-5455-44','Sample Address','mwilliams@sample.com','2020-10-21 13:18:19'),
 (6,59430244,'Claire','D','Blake','Female','+18456-5455-55','Sample','cblake@sample.com','2020-10-21 14:57:54');
 
@@ -209,7 +209,7 @@ DROP TABLE IF EXISTS `registration_info`;
 
 CREATE TABLE `registration_info` (
   `id` int(30) NOT NULL AUTO_INCREMENT,
-  `member_id` int(30) NOT NULL,
+  `user_id` int(30) NOT NULL,
   `plan_id` int(30) NOT NULL,
   `package_id` int(30) NOT NULL,
   `start_date` date NOT NULL,
@@ -222,7 +222,7 @@ CREATE TABLE `registration_info` (
 
 /*Data for the table `registration_info` */
 
-insert  into `registration_info`(`id`,`member_id`,`plan_id`,`package_id`,`start_date`,`end_date`,`trainer_id`,`status`,`date_created`) values 
+insert  into `registration_info`(`id`,`user_id`,`plan_id`,`package_id`,`start_date`,`end_date`,`trainer_id`,`status`,`date_created`) values 
 (2,5,1,2,'2020-10-21','2021-10-21',0,0,'2020-10-21'),
 (3,5,1,2,'2020-10-21','2021-10-21',0,1,'2020-10-21'),
 (4,6,1,2,'2019-10-19','2020-10-19',0,0,'2020-10-21'),
@@ -257,7 +257,7 @@ DROP TABLE IF EXISTS `schedules`;
 
 CREATE TABLE `schedules` (
   `id` int(30) NOT NULL AUTO_INCREMENT,
-  `member_id` int(30) NOT NULL,
+  `user_id` int(30) NOT NULL,
   `dow` text NOT NULL,
   `date_from` date NOT NULL,
   `date_to` date NOT NULL,

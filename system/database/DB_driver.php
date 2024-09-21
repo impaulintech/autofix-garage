@@ -1806,7 +1806,7 @@ abstract class CI_DB_driver {
 	 *
 	 * Or a query with aliasing:
 	 *
-	 * SELECT m.member_id, m.member_name FROM members AS m
+	 * SELECT m.user_id, m.member_name FROM members AS m
 	 *
 	 * Since the column name can include up to four segments (host, DB, table, column)
 	 * or also have an alias prefix, we need to do a bit of work to figure this out and

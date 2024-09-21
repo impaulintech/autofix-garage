@@ -11,7 +11,7 @@ class Schedule_model extends CI_Model
 	{
 		$this->db->select('schedules.*, members.*'); // Select fields from both tables
 		$this->db->from('schedules');
-		$this->db->join('members', 'schedules.member_id = members.id', 'left'); // Join with members
+		$this->db->join('members', 'schedules.user_id = members.id', 'left'); // Join with members
 		$this->db->group_by('schedules.id'); // Group by schedule ID to avoid duplicates
 		$query = $this->db->get();
 
@@ -54,7 +54,7 @@ class Schedule_model extends CI_Model
 
 	public function addSchedule($data)
 	{
-		return $this->db->insert('Schedule', $data);
+		return $this->db->insert('schedules', $data);
 	}
 
 	public function getSickSchedules()
@@ -71,5 +71,19 @@ class Schedule_model extends CI_Model
 	{
 		$this->db->where('sch_id', $sch_id);
 		return $this->db->update('health', $data);
+	}
+
+	public function getMemberIdByUserId($user_id)
+	{
+		$this->db->select('id');
+		$this->db->from('members');
+		$this->db->where('user_id', $user_id);
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0) {
+			return $query->row()->id;
+		}
+
+		return null;
 	}
 }

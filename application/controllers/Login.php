@@ -53,6 +53,45 @@ class Login extends CI_Controller
         }
         }
     }
+
+	public function is_admin($user_id)
+	{
+		$this->db->select('type');
+		$this->db->from('users');
+		$this->db->where('user_id', $user_id);
+		$query = $this->db->get();
+
+		if ($query->num_rows() > 0) {
+			return $query->row()->type == 1; // Check if user type is admin
+		}
+		return false; // Not found or not an admin
+	}
+
+	public function admin_login()
+	{
+		// Get input data
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+
+		// Check if username and password are set
+		if (isset($username) && isset($password)) {
+			// Check if user is admin
+			$result = $this->login_model->is_admin($username, $password);
+
+			if ($result) {
+				// Assuming $result contains user data, set session data
+				$this->session->set_userdata('user_id', $result['id']);
+				$this->session->set_userdata('role_id', 1);
+
+				redirect('admin/dashboard'); // Redirect to admin dashboard
+			} else {
+				$this->load->view('admin/login/index');
+			}
+		} else {
+			$this->load->view('admin/login/index');
+		}
+	}
+	
     public function logout()
     {
     $this->session->sess_destroy();

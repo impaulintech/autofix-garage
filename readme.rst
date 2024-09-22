@@ -1,71 +1,76 @@
-###################
-What is CodeIgniter
-###################
+# Garage Management System
 
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
+The Garage Management System is a web application developed to manage vehicle services, scheduling, and user interactions. This project is built using PHP and CodeIgniter framework, providing an intuitive user interface for administrators and regular users alike.
 
-*******************
-Release Information
-*******************
+## Project Features
+- **Admin Management:** Admins can manage vehicles, service records, and users.
+- **User Scheduling:** Users can book services, view their service history, and receive updates.
+- **User Types:**
+  - **Admin User:**
+    - Username: `admin`
+    - Password: `admin`
+  - **Test User:**
+    - Username: `test`
+    - Password: `test`
 
-This repo contains in-development code for future releases. To download the
-latest stable release please visit the `CodeIgniter Downloads
-<https://codeigniter.com/download>`_ page.
+## Prerequisites
 
-**************************
-Changelog and New Features
-**************************
+- **PHP Version:** 5.6 or newer (recommended)
+- **Database:** MySQL (or compatible)
+- **Web Server:** Apache or Nginx
 
-You can find a list of all changes for each release in the `user
-guide change log <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/changelog.rst>`_.
+## Installation Instructions
 
-*******************
-Server Requirements
-*******************
+### 1. Clone the Repository
+git clone https://github.com/your-repo/garage-management.git  
+cd garage-management
 
-PHP version 5.6 or newer is recommended.
+### 2. Setup the Database
+- Create a new database in MySQL called `garage`.
+- Import the `garage.sql` file located in the project root.
 
-It should work on 5.3.7 as well, but we strongly advise you NOT to run
-such old versions of PHP, because of potential security and performance
-issues, as well as missing features.
+  mysql -u your-username -p your-password garage < garage.sql
 
-************
-Installation
-************
+### 3. Configure the Database Connection
+- Open the `application/config/database.php` file.
+- Update the database credentials to match your local environment:
 
-Please see the `installation section <https://codeigniter.com/userguide3/installation/index.html>`_
-of the CodeIgniter User Guide.
+  'hostname' => 'localhost',  
+  'username' => 'your-db-username',  
+  'password' => 'your-db-password',  
+  'database' => 'garage',
 
-*******
-License
-*******
+### 4. Run the Application Locally
+1. Start your local development server (Apache or Nginx).
+2. Ensure the document root is pointing to the `public` folder in the CodeIgniter project.
+3. Access the application by navigating to:
 
-Please see the `license
-agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
+   http://localhost/garage-management
 
-*********
-Resources
-*********
+### 5. Admin & Test Users
+- **Admin User:**
+  - Username: `admin`
+  - Password: `admin`
+- **Test User:**
+  - Username: `test`
+  - Password: `test`
 
--  `User Guide <https://codeigniter.com/docs>`_
--  `Contributing Guide <https://github.com/bcit-ci/CodeIgniter/blob/develop/contributing.md>`_
--  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
--  `Community Forums <http://forum.codeigniter.com/>`_
--  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
--  `Community Slack Channel <https://codeigniterchat.slack.com>`_
+### 6. File Permissions
+Ensure that the following directories are writable:
+- `application/cache/`
+- `application/logs/`
 
-Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_
-or via our `page on HackerOne <https://hackerone.com/codeigniter>`_, thank you.
+### 7. Optional Configurations
+- Adjust the `base_url` in `application/config/config.php` to match your local environment:
 
-***************
-Acknowledgement
-***************
+  $config['base_url'] = 'http://localhost/garage-management/';
 
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
+## License
+This project is open-source and available under the [MIT License](LICENSE).
+
+## Support and Resources
+- [CodeIgniter Documentation](https://codeigniter.com/docs)
+- For any issues or feature requests, feel free to open an issue in the repository.
+
+## Acknowledgement
+Thanks to the CodeIgniter community and the open-source contributors for their support and contributions to the project.

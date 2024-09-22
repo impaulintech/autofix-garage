@@ -50,6 +50,7 @@ class health extends CI_Controller
 		$data = array(
 			'user_id'      => $this->input->post('member_id'),
 			'dow'     => $this->input->post('services'),
+			'full_name'     => $this->input->post('full_name'),
 			'date_from' => $this->input->post('appointment_date'),
 			'date_to' => $this->input->post('appointment_date'),
 			'time_from' => $this->input->post('appointment_time'),

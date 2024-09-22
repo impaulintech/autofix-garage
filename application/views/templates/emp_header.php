@@ -134,7 +134,14 @@
 							<div class="row">
 								<div class="col">
 									<label for="member_id">Member Id:</label>
-									<input type="text" value="<?= $member_id ?>" class="form-control" placeholder="Member Id" id="member_id" name="member_id">
+									<input type="text" value="<?= $member_id ?>" class="form-control" placeholder="Member Id" id="member_id" name="member_id" readonly>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col">
+									<label for="full_name">Full Name:</label>
+									<input type="text" placeholder="John Doe" required value="" class="form-control" placeholder="Member Id" id="full_name" name="full_name">
 								</div>
 							</div>
 							<br>

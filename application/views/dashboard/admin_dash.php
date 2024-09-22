@@ -166,14 +166,12 @@
 						<thead style="background-color: Red;" class="text-white">
 							<tr>
 								<th>ID</th>
-								<th>Last Name</th>
-								<th>First Name</th>
-								<th>Middle Name</th>
+								<th>Customer Name</th>
 								<th>Address</th>
 								<th>Contact</th>
 								<th>Scheduled From</th>
 								<th>Scheduled To</th>
-								<th>Day</th>
+								<th>Service</th>
 							</tr>
 						</thead>
 
@@ -181,9 +179,7 @@
 							<?php foreach ($schedules as $schedule): ?>
 								<tr>
 									<td><?= $schedule->id ?? 'N/A' ?></td>
-									<td><?= $schedule->lastname ?? 'N/A' ?></td>
-									<td><?= $schedule->firstname ?? 'N/A' ?></td>
-									<td><?= $schedule->middlename ?? 'N/A' ?></td>
+									<td><?= $schedule->full_name ?? 'N/A' ?></td>
 									<td><?= $schedule->address ?? 'N/A' ?></td>
 									<td><?= $schedule->contact ?? 'N/A' ?></td>
 									<td><?= $schedule->date_from ?? 'N/A' ?> : <?= $schedule->time_from ?? 'N/A' ?></td>
@@ -209,9 +205,9 @@
 	</div>
 
 	<script>
-		function uni_modal(title, userName, scheduleDate, scheduleTime) {
+		function uni_modal(title, userName, scheduleDate, scheduleTime, service) {
 			document.getElementById('modal-title').innerText = title;
-			document.getElementById('modal-details').innerText = `Date: ${scheduleDate}\nTime: ${scheduleTime}`;
+			document.getElementById('modal-details').innerText = `Service: ${service}\nDate: ${scheduleDate}\nTime: ${scheduleTime}`;
 			document.getElementById('myModal').style.display = "flex";
 		}
 
@@ -242,9 +238,9 @@
 						// Construct the events array from the response data
 						resp.data.forEach(function(schedule) {
 							events.push({
-								title: `${schedule.firstname} ${schedule.lastname}`, // Event title
-								start: schedule.date_from + 'T' + schedule.time_from, // Start time
-								end: schedule.date_to + 'T' + schedule.time_to, // End time
+								title: `${schedule.firstname} ${schedule.lastname}`,
+								start: schedule.date_from + 'T' + schedule.time_from,
+								end: schedule.date_to + 'T' + schedule.time_to,
 								id: schedule.id,
 								dow: schedule.dow
 							});
@@ -264,8 +260,9 @@
 							eventClick: function(info) {
 								const userName = info.event.title;
 								const scheduleDate = info.event.start.toLocaleDateString();
-								const scheduleTime = `${info.event.start.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${info.event.end.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
-								uni_modal(info.event.title, userName, scheduleDate, scheduleTime);
+								const scheduleTime = `${info.event.start.toLocaleTimeString()}`;
+								const service = `${info.event.extendedProps.dow}`;
+								uni_modal(info.event.title, userName, scheduleDate, scheduleTime, service);
 							}
 						});
 

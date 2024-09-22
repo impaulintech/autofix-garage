@@ -82,8 +82,8 @@
 						<ul class="list-group">
 							<?php if (!empty($schedules)): ?>
 								<?php foreach ($schedules as $schedule): ?>
-									<li class="list-group-item">
-										<?php echo date('Y-m-d H:i', strtotime($schedule['date_from'])); ?> - <?php echo $schedule['dow']; ?>
+									<li class="list-group-item text-left">
+										<?php echo date('Y-m-d H:i', strtotime($schedule['date_from'] . ' ' . $schedule['time_from'])); ?> - <?php echo $schedule['dow']; ?>
 									</li>
 								<?php endforeach; ?>
 							<?php else: ?>
@@ -123,7 +123,7 @@
 								<?php if (!empty($schedules)) : ?>
 									<?php foreach ($schedules as $schedule) : ?> {
 											title: 'Appointment: <?= $schedule['dow'] ?>',
-											start: '<?= $schedule['date_from'] ?>',
+											start: '<?= $schedule['date_from'] ?>T<?= $schedule['time_from'] ?>',
 										},
 									<?php endforeach; ?>
 								<?php endif; ?>

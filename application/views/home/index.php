@@ -3600,6 +3600,9 @@
 							<a href="#projects">Projects</a>
 						</li>
 						<li>
+							<a href="<?= site_url('register') ?>">Register</a>
+						</li>
+						<li style="border: 1px solid white">
 							<a href="<?= site_url('login') ?>">Login</a>
 						</li>
 					</ul>

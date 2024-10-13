@@ -25,14 +25,7 @@ class Dashboard extends CI_Controller
 			$this->load->view('templates/admin_header');
 			$this->load->view('dashboard/admin_dash', $data);
 			$this->load->view('templates/Footer');
-		}
-		// elseif($role == 2)
-		// {
-		//     $data['sicks'] = $this->employee_model->sicks();
-		//     $this->load->view('templates/HR_header');
-		//     $this->load->view('dashboard/hr_dash',$data);
-		//     $this->load->view('templates/Footer');
-		// } 
+		} 
 		elseif ($role == 1 || $role == 2) {
 			$data['user_id'] = $this->session->userdata('user_id');
 			$schedulesData = json_decode(json_encode($this->Schedule_model->getAllSchedules()), true);
@@ -50,14 +43,5 @@ class Dashboard extends CI_Controller
 			$this->load->view('dashboard/emp_dash', $data);
 			$this->load->view('templates/Footer');
 		}
-	}
-
-
-
-	/* // Check if the current date is equal to or past the expire_date
-$currentDate = date('y-m-d h:i:s');
-if (strtotime($currentDate) >= strtotime($expire_date)) {
-    // Update the record to set is_sick to 0
-    $this->employee_model->updateIsSickStatus($data['emp_id'], 0);
-} */
+	} 
 }

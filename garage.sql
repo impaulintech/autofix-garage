@@ -31,7 +31,9 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`garage` /*!40100 DEFAULT CHARACTER SET 
 
 USE `garage`;
 
-/*Table structure for table `garage` */
+--
+-- Table structure for table `employee`
+--
 
 CREATE TABLE `employee` (
   `emp_id` int(11) NOT NULL,
@@ -66,7 +68,8 @@ INSERT INTO `employee` (`emp_id`, `lname`, `fname`, `mname`, `address`, `contact
 (10025, 'Su', 'Gang', 'Gung', 'Caypombo', '09123456723', NULL, '2023-12-15 09:28:58', 3, NULL, NULL, NULL, NULL, 0, 4),
 (10026, 'Escote', 'Nino', 'Alvarado', 'Pandi', '09215762998', 'astig@gmail.com', '2023-12-15 09:30:23', 2, '2024-05-28 08:50:13', 2, NULL, NULL, 0, 4),
 (10027, 'Admin', 'User', '', 'Poblacion', '09123456654', NULL, '2023-12-15 09:34:32', 2, NULL, NULL, '2023-12-17 06:55:33', 3, 1, 3),
-(10028, 'Fischer', 'Jamal', 'Gwendolyn Norman', 'Qui deleniti odio la', '967', 'dujibaso@mailinator.com', '2024-09-21 10:04:05', 10027, '2024-09-21 10:04:17', 10027, NULL, NULL, 0, 3);
+(10028, 'Fischer', 'Jamal', 'Gwendolyn Norman', 'Qui deleniti odio la', '967', 'dujibaso@mailinator.com', '2024-09-21 10:04:05', 10027, '2024-09-21 10:04:17', 10027, NULL, NULL, 0, 3),
+(10030, 'Henson', 'Gannon', 'Halee Patrick', 'Tempor dolorem sed c', '+1 (524) 856-73', 'qodeka@mailinator.com', '2024-10-14 00:01:03', NULL, NULL, NULL, NULL, NULL, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -282,25 +285,26 @@ CREATE TABLE `schedule` (
   `updatedBy` smallint(20) DEFAULT NULL,
   `deletedAt` datetime DEFAULT NULL,
   `deletedBy` smallint(20) DEFAULT NULL,
-  `is_deleted` smallint(1) DEFAULT 0
+  `is_deleted` smallint(1) DEFAULT 0,
+  `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `schedule`
 --
 
-INSERT INTO `schedule` (`id`, `fname`, `lname`, `mname`, `address`, `contact`, `email`, `createdAt`, `createdBy`, `updatedAt`, `updatedBy`, `deletedAt`, `deletedBy`, `is_deleted`) VALUES
-(1, 'John', 'Doe', 'A', '123 Main St', '09123456789', 'johndoe@email.com', '2024-09-21 16:15:27', 1, '2024-09-21 16:15:27', 1, NULL, NULL, 0),
-(2, 'Jane', 'Smith', 'B', '456 Elm St', '09123456788', 'janesmith@email.com', '2024-09-21 16:20:30', 1, '2024-09-21 16:20:30', 1, NULL, NULL, 0),
-(3, 'Alice', 'Johnson', 'C', '789 Oak St', '09123456787', 'alicejohnson@email.com', '2024-09-21 16:25:45', 1, '2024-09-21 16:25:45', 1, NULL, NULL, 0),
-(4, 'Bob', 'Brown', 'D', '135 Maple St', '09123456786', 'bobbrown@email.com', '2024-09-21 16:30:12', 1, '2024-09-21 16:30:12', 1, NULL, NULL, 0),
-(5, 'Charlie', 'Davis', 'E', '246 Pine St', '09123456785', 'charliedavis@email.com', '2024-09-21 16:35:00', 1, '2024-09-21 16:35:00', 1, NULL, NULL, 0),
-(6, 'David', 'Wilson', 'F', '357 Cedar St', '09123456784', 'davidwilson@email.com', '2024-09-21 16:40:22', 1, '2024-09-21 16:40:22', 1, NULL, NULL, 0),
-(7, 'Eve', 'Martinez', 'G', '468 Birch St', '09123456783', 'evemartinez@email.com', '2024-09-21 16:45:55', 1, '2024-09-21 16:45:55', 1, NULL, NULL, 0),
-(8, 'Frank', 'Anderson', 'H', '579 Spruce St', '09123456782', 'frankanderson@email.com', '2024-09-21 16:50:18', 1, '2024-09-21 16:50:18', 1, NULL, NULL, 0),
-(9, 'Grace', 'Thomas', 'I', '680 Fir St', '09123456781', 'gracethomas@email.com', '2024-09-21 16:55:35', 1, '2024-09-21 16:55:35', 1, NULL, NULL, 0),
-(10, 'Hank', 'Taylor', 'J', '791 Willow St', '09123456780', 'hanktaylor@email.com', '2024-09-21 17:00:50', 1, '2024-09-21 17:00:50', 1, NULL, NULL, 0),
-(11, 'John', 'Doe', 'A', '123 Main St', '09123456789', 'johndoe@email.com', '2024-09-21 16:15:27', 1, '2024-09-21 16:15:27', 1, NULL, NULL, 0);
+INSERT INTO `schedule` (`id`, `fname`, `lname`, `mname`, `address`, `contact`, `email`, `createdAt`, `createdBy`, `updatedAt`, `updatedBy`, `deletedAt`, `deletedBy`, `is_deleted`, `status`) VALUES
+(1, 'John', 'Doe', 'A', '123 Main St', '09123456789', 'johndoe@email.com', '2024-09-21 16:15:27', 1, '2024-09-21 16:15:27', 1, NULL, NULL, 0, 0),
+(2, 'Jane', 'Smith', 'B', '456 Elm St', '09123456788', 'janesmith@email.com', '2024-09-21 16:20:30', 1, '2024-09-21 16:20:30', 1, NULL, NULL, 0, 0),
+(3, 'Alice', 'Johnson', 'C', '789 Oak St', '09123456787', 'alicejohnson@email.com', '2024-09-21 16:25:45', 1, '2024-09-21 16:25:45', 1, NULL, NULL, 0, 0),
+(4, 'Bob', 'Brown', 'D', '135 Maple St', '09123456786', 'bobbrown@email.com', '2024-09-21 16:30:12', 1, '2024-09-21 16:30:12', 1, NULL, NULL, 0, 0),
+(5, 'Charlie', 'Davis', 'E', '246 Pine St', '09123456785', 'charliedavis@email.com', '2024-09-21 16:35:00', 1, '2024-09-21 16:35:00', 1, NULL, NULL, 0, 0),
+(6, 'David', 'Wilson', 'F', '357 Cedar St', '09123456784', 'davidwilson@email.com', '2024-09-21 16:40:22', 1, '2024-09-21 16:40:22', 1, NULL, NULL, 0, 0),
+(7, 'Eve', 'Martinez', 'G', '468 Birch St', '09123456783', 'evemartinez@email.com', '2024-09-21 16:45:55', 1, '2024-09-21 16:45:55', 1, NULL, NULL, 0, 0),
+(8, 'Frank', 'Anderson', 'H', '579 Spruce St', '09123456782', 'frankanderson@email.com', '2024-09-21 16:50:18', 1, '2024-09-21 16:50:18', 1, NULL, NULL, 0, 0),
+(9, 'Grace', 'Thomas', 'I', '680 Fir St', '09123456781', 'gracethomas@email.com', '2024-09-21 16:55:35', 1, '2024-09-21 16:55:35', 1, NULL, NULL, 0, 0),
+(10, 'Hank', 'Taylor', 'J', '791 Willow St', '09123456780', 'hanktaylor@email.com', '2024-09-21 17:00:50', 1, '2024-09-21 17:00:50', 1, NULL, NULL, 0, 0),
+(11, 'John', 'Doe', 'A', '123 Main St', '09123456789', 'johndoe@email.com', '2024-09-21 16:15:27', 1, '2024-09-21 16:15:27', 1, NULL, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -327,7 +331,9 @@ INSERT INTO `schedules` (`id`, `user_id`, `full_name`, `dow`, `date_from`, `date
 (4, 8, 'test user', 'Injector Testing and Cleaning', '2024-09-21', '2024-09-21', '15:00:00', '16:00:00'),
 (16, 8, 'test user 4', 'Underwash', '2024-10-03', '2024-10-03', '06:08:00', '06:08:00'),
 (17, 8, 'test', 'Vulcanizing', '2024-09-25', '2024-09-25', '00:19:00', '00:19:00'),
-(18, 8, 'test', 'Car Wash', '2024-09-19', '2024-09-19', '08:30:00', '08:30:00');
+(18, 8, 'test', 'Car Wash', '2024-09-19', '2024-09-19', '08:30:00', '08:30:00'),
+(19, 0, 'Jared Daniels', 'Wheel Alignment', '1971-06-24', '1971-06-24', '18:26:00', '18:26:00'),
+(20, 0, 'Jemima Huber', 'Vulcanizing', '2024-10-14', '2024-10-14', '20:10:00', '20:10:00');
 
 -- --------------------------------------------------------
 
@@ -377,12 +383,11 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `lastLogin`, `createdAt`, `createdBy`, `updatedAt`, `updatedBy`, `deletedAt`, `deletedBy`, `is_deleted`, `active`, `emp_id`) VALUES
-(1, 'memen', '12345', NULL, '2023-12-14 14:25:09', NULL, '2023-12-16 12:27:47', 3, NULL, NULL, 0, 1, 3),
-(2, 'tikoy', '123', NULL, '2023-12-14 14:25:37', NULL, NULL, NULL, NULL, NULL, 0, 1, 5),
-(3, 'prince', '123', NULL, '2023-12-14 14:26:26', NULL, NULL, NULL, NULL, NULL, 0, 1, 10023),
-(4, 'test', 'test', NULL, '2023-12-15 03:50:19', NULL, '2024-05-27 04:58:55', 5, NULL, NULL, 0, 0, 10023),
-(1111, 'admin', 'admin', '2024-09-21 13:38:42', '2024-09-21 13:38:42', NULL, '2024-09-21 13:39:27', NULL, NULL, NULL, 0, 0, 10027),
-(1115, 'test2', 'test2', NULL, '2024-09-21 02:08:02', 10027, NULL, NULL, NULL, NULL, 0, 0, 4);
+(1, 'memen', '12345', NULL, '2023-12-14 14:25:09', NULL, '2023-12-16 12:27:47', 3, NULL, NULL, 0, 0, 3),
+(2, 'tikoy', '123', NULL, '2023-12-14 14:25:37', NULL, NULL, NULL, '2024-10-14 12:44:25', 3, 1, 0, 5),
+(3, 'admin', 'admin', NULL, '2023-12-14 14:26:26', NULL, NULL, NULL, NULL, NULL, 0, 1, 3),
+(4, 'test', 'test', NULL, '2023-12-15 03:50:19', NULL, '2024-05-27 04:58:55', 5, NULL, NULL, 0, 1, 10023),
+(1117, 'mewigi', 'test', NULL, '2024-10-14 00:01:03', NULL, NULL, NULL, NULL, NULL, 0, 1, 10030);
 
 -- --------------------------------------------------------
 
@@ -498,7 +503,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `emp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10029;
+  MODIFY `emp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10031;
 
 --
 -- AUTO_INCREMENT for table `health`
@@ -546,7 +551,7 @@ ALTER TABLE `registration_info`
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `trainers`
@@ -558,7 +563,7 @@ ALTER TABLE `trainers`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1116;
+  MODIFY `user_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1118;
 
 --
 -- AUTO_INCREMENT for table `users`

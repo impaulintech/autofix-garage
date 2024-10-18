@@ -15,7 +15,7 @@ class Dashboard extends CI_Controller
 		$role = $this->session->userdata('role_id');
 		if ($role == 4 || $role == 3) {
 			$schedulesData = $this->Schedule_model->getAllSchedules();
-
+			
 			$data['schedules'] = $schedulesData['data'];
 			$data['totalSchedules'] = $schedulesData['total'];
 			$data['totalSchedulesToday'] = $schedulesData['totalToday'];
@@ -25,8 +25,7 @@ class Dashboard extends CI_Controller
 			$this->load->view('templates/admin_header');
 			$this->load->view('dashboard/admin_dash', $data);
 			$this->load->view('templates/Footer');
-		} 
-		elseif ($role == 1 || $role == 2) {
+		} elseif ($role == 1 || $role == 2) {
 			$data['user_id'] = $this->session->userdata('user_id');
 			$schedulesData = json_decode(json_encode($this->Schedule_model->getAllSchedules()), true);
 			$member_id = $this->Schedule_model->getMemberIdByUserId($data['user_id']);
@@ -43,5 +42,5 @@ class Dashboard extends CI_Controller
 			$this->load->view('dashboard/emp_dash', $data);
 			$this->load->view('templates/Footer');
 		}
-	} 
+	}
 }

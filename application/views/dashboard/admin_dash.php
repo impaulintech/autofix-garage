@@ -172,6 +172,7 @@
 								<th>Scheduled From</th>
 								<th>Scheduled To</th>
 								<th>Service</th>
+								<th>Status</th>
 							</tr>
 						</thead>
 
@@ -185,10 +186,89 @@
 									<td><?= $schedule->date_from ?? 'N/A' ?> : <?= $schedule->time_from ?? 'N/A' ?></td>
 									<td><?= $schedule->date_to ?? 'N/A' ?> : <?= $schedule->time_to ?? 'N/A' ?></td>
 									<td><?= $schedule->dow ?? 'N/A' ?></td>
+									<td>
+										<button class="btn <?= $schedule->status == 1 ? 'btn-default' : 'btn-success' ?> approve-btn"
+											data-id="<?= $schedule->schedule_id ?? '' ?>"
+											data-name="<?= $schedule->full_name ?? '' ?>"
+											data-datefrom="<?= $schedule->date_from ?? '' ?>"
+											data-timefrom="<?= $schedule->time_from ?? '' ?>"
+											data-dow="<?= $schedule->dow ?? '' ?>"
+											<?= $schedule->status == 0 ? '' : 'disabled="true"' ?>
+											data-status="<?= $schedule->status == 0 ? 'Pending' : 'Approved' ?>">
+											<?= $schedule->status == 0 ? 'Approve' : 'Approved' ?>
+										</button>
+									</td>
 								</tr>
 							<?php endforeach; ?>
-						</tbody>
+						</tbody><!-- Modal for Approving Schedule -->
+						<div id="approveModal" class="modal">
+							<div class="modal-content">
+								<span class="close">&times;</span>
+								<h2 id="approveModalTitle"></h2>
+								<p id="approveModalDetails"></p>
+								<button id="confirmApprove" class="btn btn-success">Confirm</button>
+								<button class="btn btn-secondary close">x</button>
+							</div>
+						</div>
+						<script>
+							// Handle the 'Approve' button click
+							document.addEventListener('click', function(e) {
+								if (e.target.classList.contains('approve-btn')) {
+									const userName = e.target.getAttribute('data-name');
+									const dateFrom = e.target.getAttribute('data-datefrom');
+									const timeFrom = e.target.getAttribute('data-timefrom');
+									const service = e.target.getAttribute('data-dow');
+									const status = e.target.getAttribute('data-status');
+									const scheduleId = e.target.getAttribute('data-id');
+									console.log(scheduleId);
+									document.getElementById('approveModalTitle').innerText = `Approve Schedule for ${userName}`;
+									document.getElementById('approveModalDetails').innerText = `Service: ${service}\nDate: ${dateFrom}\nTime: ${timeFrom}\nStatus: ${status}`;
+									document.getElementById('approveModal').style.display = "flex";
 
+									document.getElementById('confirmApprove').onclick = function() {
+										approveSchedule(scheduleId);
+									};
+								}
+							});
+
+							const devURL = window.location.origin + window.location.pathname;
+
+							function approveSchedule(scheduleId) {
+								$.ajax({
+									url: devURL + '/../api/schedules/approve_schedule',
+									method: 'POST',
+									data: {
+										id: scheduleId,
+									},
+									success: function(response) {
+										const res = JSON.parse(response);
+										if (res.success) {
+											alert(res.message);
+											document.getElementById('approveModal').style.display = "none";
+											location.reload();
+										} else {
+											alert(res.message);
+										}
+									},
+									error: function(xhr, status, error) {
+										console.error('Error approving schedule:', error);
+										alert('An error occurred while trying to approve the schedule.');
+									}
+								});
+							}
+
+							document.querySelectorAll('.close').forEach(function(closeBtn) {
+								closeBtn.onclick = function() {
+									document.getElementById('approveModal').style.display = "none";
+								};
+							});
+
+							window.onclick = function(event) {
+								if (event.target === document.getElementById('approveModal')) {
+									document.getElementById('approveModal').style.display = "none";
+								}
+							};
+						</script>
 					</table>
 				</div>
 			</div>
@@ -205,9 +285,9 @@
 	</div>
 
 	<script>
-		function uni_modal(title, userName, scheduleDate, scheduleTime, service) {
+		function uni_modal(title, userName, scheduleDate, scheduleTime, service, status) {
 			document.getElementById('modal-title').innerText = title;
-			document.getElementById('modal-details').innerText = `Service: ${service}\nDate: ${scheduleDate}\nTime: ${scheduleTime}`;
+			document.getElementById('modal-details').innerText = `Service: ${service}\nDate: ${scheduleDate}\nTime: ${scheduleTime}\nStatus: ${status} `;
 			document.getElementById('myModal').style.display = "flex";
 		}
 
@@ -242,7 +322,8 @@
 								start: schedule.date_from + 'T' + schedule.time_from,
 								end: schedule.date_to + 'T' + schedule.time_to,
 								id: schedule.id,
-								dow: schedule.dow
+								dow: schedule.dow,
+								status: schedule.status
 							});
 						});
 
@@ -262,7 +343,9 @@
 								const scheduleDate = info.event.start.toLocaleDateString();
 								const scheduleTime = `${info.event.start.toLocaleTimeString()}`;
 								const service = `${info.event.extendedProps.dow}`;
-								uni_modal(info.event.title, userName, scheduleDate, scheduleTime, service);
+								const status = `${info.event.extendedProps.status}`;
+
+								uni_modal(info.event.title, userName, scheduleDate, scheduleTime, service, status == '0' ? 'Pending for Approval' : 'Approved');
 							}
 						});
 

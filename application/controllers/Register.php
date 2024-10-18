@@ -34,7 +34,7 @@ class Register extends CI_Controller
 				'password' => $this->input->post('password'),
 				'createdAt' => date('Y-m-d H:i:s'),
 				'is_deleted' => 0,
-				'active' => 0,
+				'active' => 1,
 			);
 
 			$employee_data = array(

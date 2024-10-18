@@ -13,6 +13,9 @@ class Health_model extends CI_Model
         $this->db->from('health');
         $this->db->join('employee', 'employee.emp_id = health.emp_id');
         $this->db->join('illness', 'illness.ill_id = health.ill_id');
+        $this->db->join('user', 'user.emp_id = employee.emp_id');
+        $this->db->join('members', 'members.user_id = user.user_id');
+        $this->db->join('schedules', 'schedules.user_id = members.id');
         $query = $this->db->get();
         return $query->result();
     }

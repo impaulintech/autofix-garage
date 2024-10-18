@@ -27,24 +27,7 @@ class health extends CI_Controller
 			redirect('login');
 		}
 	}
-	// public function add()
-	// {
-	// 	$data = array(
-	// 		'emp_id'        => $this->input->post('emp_id'),
-	// 		'ill_id'        => $this->input->post('ill_id'),
-	// 		'is_sick'       => 1,
-	// 		'date_declared' => date('y-m-d h:i:s'),
-	// 	);
 
-	// 	$result = $this->Health_model->add($data);
-	// 	if ($result) {
-	// 		$this->session->set_flashdata('msg', 'report recorded');
-	// 		redirect('dashboard');
-	// 	} else {
-	// 		$this->session->set_flashdata('msg', 'report failed to record');
-	// 		redirect('dashboard');
-	// 	}
-	// }
 	public function add()
 	{
 		$data = array(
@@ -81,6 +64,23 @@ class health extends CI_Controller
 			redirect('dashboard');
 		} else {
 			$this->session->set_flashdata('msg', 'Selected user has been failed updated ');
+			redirect('dashboard');
+		}
+	}
+
+	public function approve_schedule($schedule_id)
+	{
+		$data = array(
+			'status' => 1,
+		);
+
+		$result = $this->Schedule_model->updateScheduleStatus($schedule_id, $data);
+
+		if ($result) {
+			$this->session->set_flashdata('msg', 'Schedule has been approved successfully.');
+			redirect('dashboard'); 
+		} else {
+			$this->session->set_flashdata('msg', 'Failed to approve the schedule.');
 			redirect('dashboard');
 		}
 	}

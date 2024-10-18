@@ -9,16 +9,21 @@ class Schedule_model extends CI_Model
 
 	public function getAllSchedules()
 	{
-		$this->db->select('schedules.*, members.*'); // Select fields from both tables
+		$this->db->select('schedules.id AS schedule_id, schedules.*, members.*');
 		$this->db->from('schedules');
-		$this->db->join('members', 'schedules.user_id = members.id', 'left'); // Join with members
-		$this->db->group_by('schedules.id'); // Group by schedule ID to avoid duplicates
+		$this->db->join('members', 'schedules.user_id = members.id', 'left');
+		$this->db->group_by('schedules.id');
 		$query = $this->db->get();
 
-		$result = $query->result(); // Get the actual data
-		$totalCount = $query->num_rows(); // Get the total count
+		if (!$query) {
+			$error = $this->db->error();
+			log_message('error', 'Database error: ' . print_r($error, true));
+		}
 
-		// Calculate totals for today and this week
+		$result = $query->result();
+		log_message('info', print_r($result, true));
+
+		$totalCount = $query->num_rows();
 		$totalToday = $this->getSchedulesForToday();
 		$totalThisWeek = $this->getSchedulesForWeek();
 
@@ -29,6 +34,7 @@ class Schedule_model extends CI_Model
 			'totalThisWeek' => $totalThisWeek,
 		];
 	}
+
 
 
 	public function getSchedulesForToday()
@@ -85,5 +91,11 @@ class Schedule_model extends CI_Model
 		}
 
 		return null;
+	}
+
+	public function updateScheduleStatus($schedule_id, $data)
+	{
+		$this->db->where('id', $schedule_id);
+		return $this->db->update('schedules', $data);
 	}
 }

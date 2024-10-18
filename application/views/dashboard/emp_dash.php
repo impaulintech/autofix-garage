@@ -84,6 +84,11 @@
 								<?php foreach ($schedules as $schedule): ?>
 									<li class="list-group-item text-left">
 										<?php echo date('Y-m-d H:i', strtotime($schedule['date_from'] . ' ' . $schedule['time_from'])); ?> - <?php echo $schedule['dow']; ?>
+										<?php if ($schedule['status'] == 0): ?>
+											<span class="badge bg-warning float-right" style="padding: 6px">Pending for Approval</span>
+										<?php else: ?>
+											<span class="badge bg-success float-right" style="padding: 6px">Approved</span>
+										<?php endif; ?>
 									</li>
 								<?php endforeach; ?>
 							<?php else: ?>
@@ -99,9 +104,9 @@
 				<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
 
 				<script>
-					function openModals(title, date, time) {
+					function openModals(title, date, time, status) {
 						document.getElementById('modals-title').innerText = title;
-						document.getElementById('modals-details').innerText = `Date: ${date}\nTime: ${time}`;
+						document.getElementById('modals-details').innerText = `Date: ${date}\nTime: ${time}\nStatus: ${status === '1' ? 'Approved' : 'Pending for Approval'} `;
 						document.getElementById('myModals').style.display = "flex";
 					}
 
@@ -124,12 +129,13 @@
 									<?php foreach ($schedules as $schedule) : ?> {
 											title: 'Appointment: <?= $schedule['dow'] ?>',
 											start: '<?= $schedule['date_from'] ?>T<?= $schedule['time_from'] ?>',
+											id: '<?= $schedule['status'] ?>',
 										},
 									<?php endforeach; ?>
 								<?php endif; ?>
 							],
 							eventClick: function(info) {
-								openModals(info.event.title, info.event.start.toISOString().split('T')[0], info.event.start.toLocaleTimeString());
+								openModals(info.event.title, info.event.start.toISOString().split('T')[0], info.event.start.toLocaleTimeString(), info.event.id);
 							}
 						});
 						calendar.render();

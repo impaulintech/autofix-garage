@@ -35,6 +35,7 @@ class Login extends CI_Controller
 				if ($result['active'] == 1) {
 					$this->session->set_userdata('user', 'msg');
 					$this->session->set_userdata('emp_id', $result['emp_id']);
+					$this->session->set_userdata('status', $result['status']);
 					$this->session->set_userdata('fname', $result['fname']);
 					$this->session->set_userdata('mname', $result['mname']);
 					$this->session->set_userdata('lname', $result['lname']);
@@ -103,7 +104,6 @@ class Login extends CI_Controller
 
 	public function user_login()
 	{
-
 		$this->load->view('user_login/index');
 	}
 }

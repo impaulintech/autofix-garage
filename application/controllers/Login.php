@@ -51,7 +51,13 @@ class Login extends CI_Controller
 				}
 			} else {
 				$this->session->set_flashdata('error', 'Login Failed. Please check your username and password.');
-				redirect('login');
+
+				$referer = $this->input->server('HTTP_REFERER');
+				if (strpos($referer, 'admin/login') !== false) {
+					redirect('admin/login');
+				} else {
+					redirect('login');
+				}
 			}
 		}
 	}

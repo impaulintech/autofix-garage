@@ -8,7 +8,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['role_id'] == 1) {
     exit();
 } else {
     // Admin is not logged in, redirect to the login page
-    header("Location: login/index.php");
+    header("Location: admin/login/index.php");
     exit();
 }
 ?>

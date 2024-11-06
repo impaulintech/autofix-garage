@@ -138,13 +138,13 @@
 								</div>
 							</div>
 							<br>
-							<div class="row">
+							<!--<div class="row">
 								<div class="col">
 									<label for="full_name">Full Name:</label>
 									<input type="text" placeholder="John Doe" required value="" class="form-control" placeholder="Member Id" id="full_name" name="full_name">
 								</div>
 							</div>
-							<br>
+							<br>-->
 							<div class="row">
 								<div class="col">
 									<label for="services">Services:</label>

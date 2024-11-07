@@ -63,42 +63,57 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-12 col-lg-2">
-
 				</div>
 
 				<div class="registration-container col-12 col-lg-8">
 					<div class="registration-form d-flex shadow-lg p-5 mb-5 bg-white rounded">
-						<div class="col registration-main d-flex align-items-center flex-column justify-content-center">
+						<div class="col registration-main d-flex align-items-center justify-content-center" style="gap: 3%;">
+							<img src="<?= base_url('assets/images/autofixicon.png') ?>" alt="">
 							<div class="registration-content d-flex align-items-start flex-column" style="width: 50%;">
 								<h3 class="mb-5">Register</h3>
 
 								<!-- User Information -->
-								<label for="username" class="text-muted">Username</label>
-								<input style="width: 100%;" type="text" name="username" id="username" required>
-								<br>
-								<label for="password" class="text-muted">Password</label>
-								<input style="width: 100%;" type="password" name="password" id="password" required>
+								<div style="display: flex; gap: 3%;">
+									<div>
+										<label for="username" class="text-muted">Username</label>
+										<input style="width: 100%;" type="text" name="username" id="username" required>
+									</div>
+									<div>
+										<label for="password" class="text-muted">Password</label>
+										<input style="width: 100%;" type="password" name="password" id="password" required>
+									</div>
+								</div>
 								<br>
 								<label for="email" class="text-muted">Email</label>
 								<input style="width: 100%;" type="email" name="email" id="email" required>
 								<br>
 								<!-- Employee Information -->
-								<label for="fname" class="text-muted">First Name</label>
-								<input style="width: 100%;" type="text" name="fname" id="fname" required>
-								<br>
-								<label for="mname" class="text-muted">Middle Name</label>
-								<input style="width: 100%;" type="text" name="mname" id="mname">
+								<div style="display: flex; gap: 3%;">
+									<div>
+										<label for="fname" class="text-muted">First Name</label>
+										<input style="width: 100%;" type="text" name="fname" id="fname" required>
+									</div>
+									<div>
+										<label for="mname" class="text-muted">Middle Name</label>
+										<input style="width: 100%;" type="text" name="mname" id="mname">
+									</div>
+								</div>
 								<br>
 								<label for="lname" class="text-muted">Last Name</label>
 								<input style="width: 100%;" type="text" name="lname" id="lname" required>
 								<br>
-								<label for="address" class="text-muted">Address</label>
-								<input style="width: 100%;" type="text" name="address" id="address" required>
+								<div style="display: flex; gap: 3%;">
+									<div>
+										<label for="address" class="text-muted">Address</label>
+										<input style="width: 100%;" type="text" name="address" id="address" required>
+									</div>
+									<div>
+										<label for="contact" class="text-muted">Contact Number</label>
+										<input style="width: 100%;" type="tel" name="contact" id="contact" required>
+									</div>
+								</div>
 								<br>
-								<label for="contact" class="text-muted">Contact Number</label>
-								<input style="width: 100%;" type="tel" name="contact" id="contact" required>
-								<br>
-								<input style="width: 100%;" type="submit" value="Register" class="mb-1">
+								<input style="width: 100%;height: 45px" type="submit" value="Register" class="mb-1">
 								<br>
 								<center><a style="width: 100%;text-align:center" href="<?= site_url('login') ?>" class="text-muted">Already have an account? Login</a></center>
 							</div>

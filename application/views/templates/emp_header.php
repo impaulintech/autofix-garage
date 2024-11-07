@@ -147,29 +147,139 @@
 							<br>-->
 							<div class="row">
 								<div class="col">
-									<label for="services">Services:</label>
-									<select class="form-control" name="services" id="services" required="">
-										<option value="">Select a service</option>
-										<option value="OBD Scanning">OBD Scanning</option>
-										<option value="Computer Box Repair">Computer Box Repair</option>
-										<option value="Electronic Troubleshooting">Electronic Troubleshooting</option>
-										<option value="ECU Remapping">ECU Remapping</option>
-										<option value="DPF, DPD, EGR Removal">DPF, DPD, EGR Removal</option>
-										<option value="Transmission Overhauling">Automatic Transmission Overhauling</option>
-										<option value="Engine Overhauling">Engine Overhauling</option>
-										<option value="Injector Testing and Cleaning">Injector Testing and Cleaning</option>
-										<option value="Wheel Alignment">Wheel Alignment</option>
-										<option value="Wheel Balancing">Wheel Balancing</option>
-										<option value="Brake and Suspension Services">Brake and Suspension Services</option>
-										<option value="Vulcanizing">Vulcanizing</option>
-										<option value="Oil Change">Oil Change</option>
-										<option value="Detailing">Detailing</option>
-										<option value="Car Wash">Car Wash</option>
-										<option value="Ceramic Coating">Ceramic Coating</option>
-										<option value="Underwash">Underwash</option>
+									<label>Services:</label>
+									<div id="servicesContainer"></div>
+								</div>
+							</div>
+							<script>
+								const services = [{
+										name: "OBD Scanning - ₱500",
+										price: "₱500"
+									},
+									{
+										name: "Computer Box Repair - ₱1500",
+										price: "₱1500"
+									},
+									{
+										name: "Electronic Troubleshooting - ₱1200",
+										price: "₱1200"
+									},
+									{
+										name: "ECU Remapping - ₱3000",
+										price: "₱3000"
+									},
+									{
+										name: "DPF, DPD, EGR Removal - ₱2500",
+										price: "₱2500"
+									},
+									{
+										name: "Transmission Overhauling - ₱6000",
+										price: "₱6000"
+									},
+									{
+										name: "Engine Overhauling - ₱7000",
+										price: "₱7000"
+									},
+									{
+										name: "Injector Testing and Cleaning - ₱1800",
+										price: "₱1800"
+									},
+									{
+										name: "Wheel Alignment - ₱800",
+										price: "₱800"
+									},
+									{
+										name: "Wheel Balancing - ₱500",
+										price: "₱500"
+									},
+									{
+										name: "Brake and Suspension Services - ₱1200",
+										price: "₱1200"
+									},
+									{
+										name: "Vulcanizing - ₱300",
+										price: "₱300"
+									},
+									{
+										name: "Oil Change - ₱700",
+										price: "₱700"
+									},
+									{
+										name: "Detailing - ₱2500",
+										price: "₱2500"
+									},
+									{
+										name: "Car Wash - ₱400",
+										price: "₱400"
+									},
+									{
+										name: "Ceramic Coating - ₱5000",
+										price: "₱5000"
+									},
+									{
+										name: "Underwash - ₱350",
+										price: "₱350"
+									}
+								];
+
+								const servicesContainer = document.getElementById("servicesContainer");
+
+								services.forEach((service, index) => {
+									const serviceDiv = document.createElement("div");
+									serviceDiv.classList.add("form-check");
+
+									const checkbox = document.createElement("input");
+									checkbox.classList.add("form-check-input");
+									checkbox.type = "checkbox";
+									checkbox.name = "services[]";
+									checkbox.value = service.name;
+									checkbox.id = `service${index}`;
+
+									const label = document.createElement("label");
+									label.classList.add("form-check-label");
+									label.setAttribute("for", `service${index}`);
+									label.textContent = `${service.name} - ${service.price}`;
+
+									serviceDiv.appendChild(checkbox);
+									serviceDiv.appendChild(label);
+
+									servicesContainer.appendChild(serviceDiv);
+								});
+							</script>
+							<br>
+
+							<div class="row">
+								<div class="col">
+									<label for="services">Select Mechanic:</label>
+									<select class="form-control" name="mechanic" id="mechanic" required>
+										<option value="">Select a mechanic</option>
 									</select>
 								</div>
 							</div>
+
+							<script>
+								const mechanics = [
+									"Jose Reyes",
+									"Carlos Dela Cruz",
+									"Maria Santos",
+									"Antonio Garcia",
+									"Juanito Lopez",
+									"Liza Torres",
+									"Ernesto Aquino",
+									"Ricardo Fernandez",
+									"Emilia Bautista",
+									"Dante Villanueva"
+								];
+
+								const mechanicSelect = document.getElementById('mechanic');
+
+								mechanics.forEach(mechanic => {
+									const option = document.createElement('option');
+									option.value = mechanic;
+									option.textContent = mechanic;
+									mechanicSelect.appendChild(option);
+								});
+							</script>
 							<br>
 							<div class="row">
 								<div class="col">

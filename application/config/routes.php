@@ -60,6 +60,7 @@ $route['admin/dashboard'] = '/admin/dashboard';
 
 $route['api/schedules'] = 'ScheduleApi/index';
 $route['api/schedules/approve_schedule'] = 'ScheduleApi/approve_schedule';
+$route['api/schedules/cancel_schedule'] = 'ScheduleApi/cancel_schedule';
 
 // Registration route
 $route['register'] = '/register';

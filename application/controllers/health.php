@@ -31,14 +31,18 @@ class health extends CI_Controller
 	public function add()
 	{
 		$full_name = $this->session->userdata('lname') . ' ' . $this->session->userdata('fname');
+		$services = $this->input->post('services');
+		$dow = is_array($services) ? implode(", ", $services) : $services;
+
 		$data = array(
 			'user_id'      => $this->input->post('member_id'),
-			'dow'     => $this->input->post('services'),
-			'full_name'     => $full_name,
-			'date_from' => $this->input->post('appointment_date'),
-			'date_to' => $this->input->post('appointment_date'),
-			'time_from' => $this->input->post('appointment_time'),
-			'time_to' => $this->input->post('appointment_time'),
+			'dow'          => $dow,
+			'mechanic'     => $this->input->post('mechanic'),
+			'full_name'    => $full_name,
+			'date_from'    => $this->input->post('appointment_date'),
+			'date_to'      => $this->input->post('appointment_date'),
+			'time_from'    => $this->input->post('appointment_time'),
+			'time_to'      => $this->input->post('appointment_time'),
 		);
 
 		$result = $this->Schedule_model->addSchedule($data);
@@ -79,9 +83,26 @@ class health extends CI_Controller
 
 		if ($result) {
 			$this->session->set_flashdata('msg', 'Schedule has been approved successfully.');
-			redirect('dashboard'); 
+			redirect('dashboard');
 		} else {
 			$this->session->set_flashdata('msg', 'Failed to approve the schedule.');
+			redirect('dashboard');
+		}
+	}
+
+	public function cancel_schedule($schedule_id)
+	{
+		$data = array(
+			'status' => 2,
+		);
+
+		$result = $this->Schedule_model->updateScheduleStatus($schedule_id, $data);
+
+		if ($result) {
+			$this->session->set_flashdata('msg', 'Schedule has been cancelled successfully.');
+			redirect('dashboard');
+		} else {
+			$this->session->set_flashdata('msg', 'Failed to cancel the schedule.');
 			redirect('dashboard');
 		}
 	}

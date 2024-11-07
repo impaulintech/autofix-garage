@@ -83,11 +83,14 @@
 							<?php if (!empty($schedules)): ?>
 								<?php foreach ($schedules as $schedule): ?>
 									<li class="list-group-item text-left">
-										<?php echo date('Y-m-d H:i', strtotime($schedule['date_from'] . ' ' . $schedule['time_from'])); ?> - <?php echo $schedule['dow']; ?>
+										<?php echo date('Y-m-d H:i', strtotime($schedule['date_from'] . ' ' . $schedule['time_from'])); ?>
+										<ul><?php foreach (explode(',', $schedule['dow']) as $dow) echo "<li>" . htmlspecialchars(trim($dow)) . "</li>"; ?></ul>
 										<?php if ($schedule['status'] == 0): ?>
 											<span class="badge bg-warning float-right" style="padding: 6px">Pending for Approval</span>
-										<?php else: ?>
+										<?php elseif ($schedule['status'] == 1): ?>
 											<span class="badge bg-success float-right" style="padding: 6px">Approved</span>
+										<?php elseif ($schedule['status'] == 2): ?>
+											<span class="badge bg-danger float-right" style="padding: 6px">Cancelled</span>
 										<?php endif; ?>
 									</li>
 								<?php endforeach; ?>
@@ -104,9 +107,15 @@
 				<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
 
 				<script>
-					function openModals(title, date, time, status) {
+					function openModals(title, service, status) {
+						const serviceList = service.split(',').map(s => `<li>${s}</li>`).join('');
+						let statusMessage = (status == 2) ? 'Cancelled' : (status == '0' ? 'Pending for Approval' : 'Approved');
+
 						document.getElementById('modals-title').innerText = title;
-						document.getElementById('modals-details').innerText = `Date: ${date}\nTime: ${time}\nStatus: ${status === '1' ? 'Approved' : 'Pending for Approval'} `;
+						document.getElementById('modals-details').innerHTML = `
+								<ul>${serviceList}</ul>
+								<p>Status: ${statusMessage}</p>
+						`;
 						document.getElementById('myModals').style.display = "flex";
 					}
 
@@ -127,15 +136,16 @@
 							events: [
 								<?php if (!empty($schedules)) : ?>
 									<?php foreach ($schedules as $schedule) : ?> {
-											title: 'Appointment: <?= $schedule['dow'] ?>',
+											title: 'Appointment: <?= $schedule['date_from'] ?> - <?= $schedule['time_from'] ?>',
 											start: '<?= $schedule['date_from'] ?>T<?= $schedule['time_from'] ?>',
 											id: '<?= $schedule['status'] ?>',
+											service: '<?= $schedule['dow'] ?>',
 										},
 									<?php endforeach; ?>
 								<?php endif; ?>
 							],
 							eventClick: function(info) {
-								openModals(info.event.title, info.event.start.toISOString().split('T')[0], info.event.start.toLocaleTimeString(), info.event.id);
+								openModals(info.event.title, info.event.extendedProps.service, info.event.id);
 							}
 						});
 						calendar.render();
@@ -149,7 +159,6 @@
 <!-- The Modals -->
 <div id="myModals" class="modals">
 	<div class="modals-content">
-		<span class="close">&times;</span>
 		<h2 id="modals-title"></h2>
 		<p id="modals-details"></p>
 	</div>

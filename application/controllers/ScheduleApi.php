@@ -43,4 +43,28 @@ class ScheduleApi extends CI_Controller
 			echo json_encode(array('success' => false, 'message' => 'Failed to approve the schedule.'));
 		}
 	}
+	public function cancel_schedule()
+	{
+		error_reporting(E_ALL);
+		ini_set('display_errors', 1);
+
+		$schedule_id = $this->input->post('id');
+
+		if (empty($schedule_id)) {
+			echo json_encode(array('success' => false, 'message' => 'Schedule ID is required.'));
+			return;
+		}
+
+		$data = array(
+			'status' => 2,
+		);
+
+		$result = $this->Schedule_model->updateScheduleStatus($schedule_id, $data);
+
+		if ($result) {
+			echo json_encode(array('success' => true, 'message' => 'Schedule has been cancelled successfully.'));
+		} else {
+			echo json_encode(array('success' => false, 'message' => 'Failed to cancel the schedule.'));
+		}
+	}
 }

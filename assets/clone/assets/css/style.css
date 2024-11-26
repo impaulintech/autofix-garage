@@ -501,7 +501,6 @@ nav.fill ul li a:after {
   }
 }
 
-
 .whychoose-section .blogs-section .read-more a i{
   color: var(--e-global-color-accent) !important;
   font-size: 16px;
@@ -534,7 +533,6 @@ nav.fill ul li a:after {
   0% { transform: translateY(0); }
   100% { transform: translateY(-10px); }
 }
-
 
 /* aboutus-section */
 .about-us-section{
@@ -878,8 +876,10 @@ color:var(--e-global-color-text)
 /* offer-section */
 .offer-section{
   padding: 140px 0;
-  background: url(../images/offer-section-background.jpg);
+  background: url(../images/groupic.jpg);
   position: relative;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 .offer-section:before {
   background: url(../images/offer-section-left-img.png);
@@ -1445,7 +1445,6 @@ box-shadow: 0px 7px 21px 0 #dae0e5;
   transition: all ease-in-out 0.3s;
 }
 
-
 /* .contact-us-form .contact-us-wrapper .form-btn button:hover{
   transform: translateY(-5px);
   background: var(--e-global-color-very-dark-blue);
@@ -1507,7 +1506,6 @@ box-shadow: 0px 7px 21px 0 #dae0e5;
 .carousel-section .carousel-content{
   background: var(--e-global-color-dark-blue3);
 }
-
 
 .carousel-section .carosel-text ul li i {
   color: var(--e-global-color-yellow);

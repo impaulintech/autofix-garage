@@ -220,7 +220,7 @@
 				<div class="col-lg-1 col-md-1 col-sm-12"></div>
 				<div class="col-lg-6 col-md-12 col-sm-12">
 					<figure class="about-figure" data-aos="fade-down">
-						<img src="<?= base_url('assets/clone/assets/images/aboutus-center-img.png') ?>" alt="" class="about-center-img">
+						<img src="<?= base_url('assets/images/wirings2.jpg') ?>" style="border-radius: 100%; height: 270px" alt="" class="about-center-img">
 					</figure>
 				</div>
 				<div class="col-lg-5 col-md-12 col-sm-12">
@@ -320,7 +320,7 @@
 				<div class="col-lg-6 col-md-4 col-sm-4 d-md-block d-none">
 					<div class="our-services-outer position-relative" data-aos="fade-down-left">
 						<figure class="our-services-car-img mb-0 left_icon">
-							<img src="<?= base_url('assets/clone/assets/images/our-services-img5.png') ?>" alt="">
+							<img src="<?= base_url('assets/clone/assets/images/our-services-img5.png') ?>" style="width: 400px;margin-left: 60px;" alt="">
 						</figure>
 					</div>
 				</div>
@@ -348,7 +348,7 @@
 			<div class="row">
 				<div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 d-xl-block d-none">
 					<figure class="our-mission-figure-box" data-aos="fade-left">
-						<img src="<?= base_url('assets/clone/assets/images/our-mission-img1.png') ?>" alt="">
+						<img src="<?= base_url('assets/images/baklas.png') ?>" alt="">
 					</figure>
 				</div>
 				<div class="col-xl-4 col-lg-6 col-md-6 col-sm-12">
@@ -420,7 +420,7 @@
 						<div class="col-lg-6 col-md-6 col-sm-6">
 							<div class="teams-card position-relative teams-mb" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="2000">
 								<figure class="position-relative">
-									<img src="<?= base_url('assets/clone/assets/images/teams-img1.png') ?>" alt="" class="img-fluid">
+									<img src="<?= base_url('assets/images/founder.jpeg') ?>" style="height: 180px;width: 100%; border-radius: 100%;" alt="" class="img-fluid">
 								</figure>
 								<div class="teams-icon Show"></div>
 								<div class="teams-cross-icon Hide"></div>
@@ -433,13 +433,13 @@
 									</ul>
 								</div>
 								<h6 class="title">Founder</h6>
-								<h5 class="desc">Kevin james</h5>
+								<h5 class="desc">Ericson Gener</h5>
 							</div>
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-6">
 							<div class="teams-card position-relative teams-mb" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="2000">
 								<figure>
-									<img src="<?= base_url('assets/clone/assets/images/teams-img2.png') ?>" alt="" class="img-fluid">
+									<img src="<?= base_url('assets/images/ceo.jpeg') ?>" style="height: 180px;width: 100%; border-radius: 100%;" alt="" class="img-fluid">
 								</figure>
 								<div class="teams-icon Show2"></div>
 								<div class="teams-cross-icon Hide2"></div>
@@ -452,7 +452,7 @@
 									</ul>
 								</div>
 								<h6 class="title">ceo</h6>
-								<h5 class="desc">Rene Luckey</h5>
+								<h5 class="desc">John Aeron Gener</h5>
 							</div>
 						</div>
 					</div>
@@ -460,7 +460,7 @@
 						<div class="col-lg-6 col-md-6 col-sm-6">
 							<div class="teams-card position-relative team-card-margin" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="2000">
 								<figure>
-									<img src="<?= base_url('assets/clone/assets/images/teams-img3.png') ?>" alt="" class="img-fluid">
+									<img src="<?= base_url('assets/images/mechanic.jpeg') ?>" style="height: 180px;width: 100%; border-radius: 100%;" alt="" class="img-fluid">
 								</figure>
 								<div class="teams-icon Show3"></div>
 								<div class="teams-cross-icon Hide3"></div>
@@ -472,14 +472,14 @@
 										<li class="social-icons-outer4"><a href="#"><img src="<?= base_url('assets/clone/assets/images/text-bars.png') ?>" alt=""></a></li>
 									</ul>
 								</div>
-								<h6 class="title">Mecahnic</h6>
-								<h5 class="desc">Mitchell Ker</h5>
+								<h6 class="title">Mechanic</h6>
+								<h5 class="desc">Jonathan matawaran</h5>
 							</div>
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-6">
 							<div class="teams-card position-relative" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="2000">
 								<figure>
-									<img src="<?= base_url('assets/clone/assets/images/teams-img4.png') ?>" alt="" class="img-fluid">
+									<img src="<?= base_url('assets/images/mechanic2.jpeg') ?>" style="height: 180px;width: 100%; border-radius: 100%;" alt="" class="img-fluid">
 								</figure>
 								<div class="teams-icon Show4"></div>
 								<div class="teams-cross-icon Hide4"></div>
@@ -491,8 +491,8 @@
 										<li class="social-icons-outer4"><a href="#"><img src="<?= base_url('assets/clone/assets/images/text-bars.png') ?>" alt=""></a></li>
 									</ul>
 								</div>
-								<h6 class="title">Worker</h6>
-								<h5 class="desc">Brian Rooney</h5>
+								<h6 class="title">Mechanic</h6>
+								<h5 class="desc">Randy poblete</h5>
 							</div>
 						</div>
 					</div>
@@ -656,7 +656,7 @@
 								<div class="red-box" data-aos="fade-down-right">
 								</div>
 								<figure class="carousel-left-img-fig">
-									<img src="<?= base_url('assets/clone/assets/images/carousel-left-img.png') ?>" alt="" class="img-fluid">
+									<img src="<?= base_url('assets/clone/assets/images/review2.jpg') ?>" style="width: 300px; height: 300px; border-radius: 100%" alt="" class="img-fluid">
 								</figure>
 							</div>
 							<div class="col-lg-7 col-md-7 col-sm-12">
@@ -666,10 +666,7 @@
 											<figure class="carosel-img">
 												<img src="<?= base_url('assets/clone/assets/images/carosel-logo.png') ?>" alt="">
 											</figure>
-											<h5 class="carosel-p">”Quisquam est, qui dolorem ipsum quia dolor sit
-												consectetur adipisci velit sed quia non numquam
-												eius modi tempora incidunt ut labore et dolore
-												magnam aliquam quaerat voluptatem”</h5>
+											<h5 class="carosel-p">”Solid ang serbisyo sa AutoFix Garage! Sobrang hassle-free at quality ng gawa nila, mapa-oil change man o major repairs. Kita mo talaga na expert sila with 15 years na experience. Plus, gamit pa nila yung high-tech na tools—sobrang legit! Walang sablay, AutoFix all the way! 🔥🚗”</h5>
 											<ul class="list-unstyled carosel-ul">
 												<li><i class="fa-solid fa-star"></i></li>
 												<li><i class="fa-solid fa-star"></i></li>
@@ -679,7 +676,7 @@
 											</ul>
 											<div class="carosel-tiltes d-inline-block">
 												<h6>Kevin James</h6>
-												<p class="ceo">Ceo, GTD</p>
+												<p class="ceo">Client</p>
 											</div>
 										</div>
 									</div>
@@ -688,10 +685,7 @@
 											<figure class="carosel-img">
 												<img src="<?= base_url('assets/clone/assets/images/carosel-logo.png') ?>" alt="">
 											</figure>
-											<h5 class="carosel-p">”Quisquam est, qui dolorem ipsum quia dolor sit
-												consectetur adipisci velit sed quia non numquam
-												eius modi tempora incidunt ut labore et dolore
-												magnam aliquam quaerat voluptatem”</h5>
+											<h5 class="carosel-p">”AutoFix Garage? Literal na lifesaver! 🛠️ Kung gusto mo ng smooth at walang aberyang sasakyan, sila na bahala. From engine rebuilds to aircon cleaning, lahat maayos at pulido. Tapos ang gagaling pa ng mga mekaniko, parang lodi! 🏎️👌 Highly recommend kung ayaw mo ng stress sa kotse mo.”</h5>
 											<ul class="list-unstyled carosel-ul">
 												<li><i class="fa-solid fa-star"></i></li>
 												<li><i class="fa-solid fa-star"></i></li>
@@ -701,7 +695,7 @@
 											</ul>
 											<div class="carosel-tiltes d-inline-block">
 												<h6>Kevin James</h6>
-												<p class="ceo">Ceo, GTD</p>
+												<p class="ceo">Client</p>
 											</div>
 										</div>
 									</div>

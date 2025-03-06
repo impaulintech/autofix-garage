@@ -128,9 +128,30 @@
 		</div>
 	</form>
 
+	<!-- SweetAlert2 CDN -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="<?= base_url('assets/js/jquery.js') ?>"></script>
 	<script src="<?= base_url('assets/js/popper.js') ?>"></script>
 	<script src="<?= base_url('assets/js/bootstrap.js') ?>"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="<?= base_url('assets/js/jquery.js') ?>"></script>
+
+	<script>
+		$(document).ready(function() {
+			<?php if ($this->session->flashdata('alert')):
+				$alert = $this->session->flashdata('alert'); ?>
+				Swal.fire({
+					icon: "<?= $alert['type'] ?>",
+					title: "<?= ucfirst($alert['type']) ?>",
+					text: "<?= $alert['message'] ?>"
+				}).then((result) => {
+					if (result.isConfirmed) {
+						window.location.href = "login";
+					}
+				});
+			<?php endif; ?>
+		});
+	</script>
 
 </body>
 

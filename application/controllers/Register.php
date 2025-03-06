@@ -49,10 +49,10 @@ class Register extends CI_Controller
 			);
 
 			if ($this->Register_model->register($employee_data, $user_data)) {
-				$this->session->set_flashdata('success', 'Registration successful! You can now log in.');
-				redirect('login');
+				$this->session->set_flashdata('alert', ['type' => 'success', 'message' => 'Registration successful! You can now log in.']);
+				redirect('register');
 			} else {
-				$this->session->set_flashdata('error', 'Registration failed. Please try again.');
+				$this->session->set_flashdata('alert', ['type' => 'error', 'message' => 'Registration failed. Please try again.']);
 				redirect('register');
 			}
 		}

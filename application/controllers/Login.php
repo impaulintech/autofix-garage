@@ -44,6 +44,9 @@ class Login extends CI_Controller
 					$this->session->set_userdata('email', $result['email']);
 					$this->session->set_userdata('user_id', $result['user_id']);
 					$this->session->set_userdata('role_id', $result['role_id']);
+
+					// Set success notification
+					$this->session->set_flashdata('success', 'Login successful! Welcome back.');
 					redirect('dashboard');
 				} else {
 					$this->session->set_flashdata('error', 'Your account needs approval from admin.');
@@ -51,13 +54,7 @@ class Login extends CI_Controller
 				}
 			} else {
 				$this->session->set_flashdata('error', 'Login Failed. Please check your username and password.');
-
-				$referer = $this->input->server('HTTP_REFERER');
-				if (strpos($referer, 'admin/login') !== false) {
-					redirect('admin/login');
-				} else {
-					redirect('login');
-				}
+				redirect('login');
 			}
 		}
 	}

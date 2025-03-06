@@ -60,10 +60,10 @@
 			<div class="row">
 				<div class="col-12 col-lg-2"></div>
 				<div class="login-container col-12 col-lg-8">
-					<div class="login-form d-flex shadow-lg p-5 mb-5 bg-white rounded"> 
+					<div class="login-form d-flex shadow-lg p-5 mb-5 bg-white rounded">
 						<div class="col side-image d-lg-inline-block d-none">
 							<img src="<?= base_url('assets/images/autofixicon.png') ?>" alt="" class="w-100">
-						</div> 
+						</div>
 						<div class="col login-main d-flex align-items-center flex-column justify-content-center">
 							<div class="login-content d-flex align-items-start flex-column">
 								<!-- Alert for error messages -->
@@ -91,6 +91,23 @@
 	<script src="<?= base_url('assets/js/jquery.js') ?>"></script>
 	<script src="<?= base_url('assets/js/popper.js') ?>"></script>
 	<script src="<?= base_url('assets/js/bootstrap.js') ?>"></script>
+
+	<script>
+		$(document).ready(function() {
+			<?php if ($this->session->flashdata('alert')):
+				$alert = $this->session->flashdata('alert'); ?>
+				Swal.fire({
+					icon: "<?= $alert['type'] ?>",
+					title: "<?= ucfirst($alert['type']) ?>",
+					text: "<?= $alert['message'] ?>"
+				}).then((result) => {
+					if (result.isConfirmed) {
+						window.location.href = "login";
+					}
+				});
+			<?php endif; ?>
+		});
+	</script>
 
 </body>
 

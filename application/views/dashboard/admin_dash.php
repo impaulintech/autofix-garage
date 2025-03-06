@@ -522,6 +522,33 @@
 			});
 		});
 	</script>
+<!-- SweetAlert2 CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="<?= base_url('assets/js/jquery.js') ?>"></script>
+
+<script>
+  $(document).ready(function () {
+    <?php if ($this->session->flashdata('success')): ?>
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        color: '#333',
+        iconColor: '#48c78e',
+        customClass: {
+          popup: 'small-toast'
+        }
+      });
+
+      Toast.fire({
+        icon: 'success',
+        title: "<?= $this->session->flashdata('success') ?>"
+      });
+    <?php endif; ?>
+  });
+</script>
 
 </body>
 

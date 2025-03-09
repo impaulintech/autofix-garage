@@ -215,6 +215,9 @@
 											data-datefrom="<?= $schedule->date_from ?? '' ?>"
 											data-timefrom="<?= $schedule->time_from ?? '' ?>"
 											data-dow="<?= $schedule->dow ?? '' ?>"
+											data-type="<?= $schedule->type ?? '' ?>"
+											data-model="<?= $schedule->model ?? '' ?>"
+											data-mechanic="<?= $schedule->mechanic ?? '' ?>"
 											data-status="<?= $schedule->status == 0 ? 'Pending' : 'Approved' ?>"
 											data-toggle="modal" data-target="#scheduleModal">
 											View
@@ -237,6 +240,10 @@
 										<p><strong>Contact:</strong> <span id="modalContact"></span></p>
 										<p><strong>Address:</strong> <span id="modalAddress"></span></p>
 										<p><strong>Schedule:</strong> <span id="modalSchedule"></span></p>
+										<p><strong>Car Type:</strong> <span id="modalCarType"></span></p>
+										<p><strong>Car Model:</strong> <span id="modalCarModel"></span></p>
+										<p><strong>Mechanic:</strong> <span id="modalMechanic"></span></p>
+										<p><strong>Mechanic Specialty:</strong> <span id="modalSpecialty"></span></p>
 										<p><strong>Service:</strong></p>
 										<ul id="modalServiceList"></ul>
 										<p><strong>Status:</strong> <span id="modalStatus"></span></p>
@@ -249,6 +256,48 @@
 						</div>
 
 						<script>
+							const mechanics = [{
+									name: "Jose Reyes",
+									specialty: "Engine Repair, Brake Systems"
+								},
+								{
+									name: "Carlos Dela Cruz",
+									specialty: "Transmission, Suspension"
+								},
+								{
+									name: "Maria Santos",
+									specialty: "Electrical Systems, AC Repair"
+								},
+								{
+									name: "Antonio Garcia",
+									specialty: "Oil Change, Tire Rotation"
+								},
+								{
+									name: "Juanito Lopez",
+									specialty: "Body Work, Painting"
+								},
+								{
+									name: "Liza Torres",
+									specialty: "Hybrid Vehicles, Diagnostics"
+								},
+								{
+									name: "Ernesto Aquino",
+									specialty: "Performance Tuning, Exhaust Systems"
+								},
+								{
+									name: "Ricardo Fernandez",
+									specialty: "Diesel Engines, Heavy Equipment"
+								},
+								{
+									name: "Emilia Bautista",
+									specialty: "Battery Services, Wiring"
+								},
+								{
+									name: "Dante Villanueva",
+									specialty: "Cooling Systems, Radiators"
+								}
+							];
+
 							$('.view-btn').on('click', function() {
 								let name = $(this).data('name');
 								let contact = $(this).data('contact');
@@ -256,13 +305,23 @@
 								let datefrom = $(this).data('datefrom');
 								let timefrom = $(this).data('timefrom');
 								let dow = $(this).data('dow');
+								let type = $(this).data('type');
+								let model = $(this).data('model');
 								let status = $(this).data('status');
+								let mechanic = $(this).data('mechanic');
+
+								let selectedMechanic = mechanics.find(m => m.name === mechanic);
+								let specialty = selectedMechanic ? selectedMechanic.specialty : "N/A";
 
 								$('#modalName').text(name);
 								$('#modalContact').text(contact);
 								$('#modalAddress').text(address);
 								$('#modalSchedule').text(datefrom + ' : ' + timefrom);
+								$('#modalCarType').text(type);
+								$('#modalCarModel').text(model);
 								$('#modalStatus').text(status);
+								$('#modalMechanic').text(mechanic);
+								$('#modalSpecialty').text(specialty);
 
 								if (dow) {
 									var serviceList = dow.split(',');
@@ -278,7 +337,7 @@
 							});
 
 							$('#scheduleModal').on('hidden.bs.modal', function() {
-								$('#modalName, #modalContact, #modalAddress, #modalSchedule, #modalService, #modalStatus').text('');
+								$('#modalName, #modalContact, #modalAddress, #modalSchedule, #modalService, #modalStatus, #modalCarType, #modalCarModel, #modalMechanic').text('');
 								$('#modalServiceList').empty();
 
 								removeBackdrop();
@@ -448,9 +507,9 @@
 	</div>
 
 	<script>
-		function uni_modal(title, userName, scheduleDate, scheduleTime, service, status) {
+		function uni_modal(title, scheduleDate, scheduleTime, service, status, type, model, mechanic) {
 			document.getElementById('modal-title').innerText = title;
-			document.getElementById('modal-details').innerText = `Service: ${service}\nDate: ${scheduleDate}\nTime: ${scheduleTime}\nStatus: ${status} `;
+			document.getElementById('modal-details').innerText = `Service: ${service}\nDate: ${scheduleDate}\nTime: ${scheduleTime}\nStatus: ${status}\nCar Type: ${type} \nCar Model: ${model}\nMechanic: ${mechanic}`;
 			document.getElementById('myModal').style.display = "flex";
 		}
 
@@ -472,25 +531,26 @@
 
 			// Fetching the schedules from the API
 			$.ajax({
-				url: devURL + '/../api/schedules', // Adjust the URL as needed
+				url: devURL + '/../api/schedules',
 				method: 'GET',
 				success: function(resp) {
 					if (resp) {
 						const events = [];
 
-						// Construct the events array from the response data
 						resp.data.forEach(function(schedule) {
 							events.push({
-								title: `${schedule.firstname} ${schedule.lastname}`,
+								title: `Appointment`,
 								start: schedule.date_from + 'T' + schedule.time_from,
 								end: schedule.date_to + 'T' + schedule.time_to,
 								id: schedule.id,
 								dow: schedule.dow,
-								status: schedule.status
+								status: schedule.status,
+								type: schedule.type,
+								model: schedule.model,
+								mechanic: schedule.mechanic
 							});
 						});
 
-						// Initialize the calendar
 						calendar = new FullCalendar.Calendar(calendarEl, {
 							headerToolbar: {
 								left: 'prev,next today',
@@ -509,11 +569,11 @@
 								const status = `${info.event.extendedProps.status}`;
 								let statusMessage = (status == 2) ? 'Cancelled' : (status == '0' ? 'Pending for Approval' : 'Approved');
 
-								uni_modal(info.event.title, userName, scheduleDate, scheduleTime, service, statusMessage);
+								uni_modal('Appointment', scheduleDate, scheduleTime, service, statusMessage, info.event.extendedProps.type, info.event.extendedProps.model, info.event.extendedProps.mechanic);
 							}
 						});
 
-						calendar.render(); // Render the calendar
+						calendar.render();
 					}
 				},
 				error: function(xhr, status, error) {
@@ -522,33 +582,33 @@
 			});
 		});
 	</script>
-<!-- SweetAlert2 CDN -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="<?= base_url('assets/js/jquery.js') ?>"></script>
+	<!-- SweetAlert2 CDN -->
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="<?= base_url('assets/js/jquery.js') ?>"></script>
 
-<script>
-  $(document).ready(function () {
-    <?php if ($this->session->flashdata('success')): ?>
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        color: '#333',
-        iconColor: '#48c78e',
-        customClass: {
-          popup: 'small-toast'
-        }
-      });
+	<script>
+		$(document).ready(function() {
+			<?php if ($this->session->flashdata('success')): ?>
+				const Toast = Swal.mixin({
+					toast: true,
+					position: 'top-end',
+					showConfirmButton: false,
+					timer: 3000,
+					timerProgressBar: true,
+					color: '#333',
+					iconColor: '#48c78e',
+					customClass: {
+						popup: 'small-toast'
+					}
+				});
 
-      Toast.fire({
-        icon: 'success',
-        title: "<?= $this->session->flashdata('success') ?>"
-      });
-    <?php endif; ?>
-  });
-</script>
+				Toast.fire({
+					icon: 'success',
+					title: "<?= $this->session->flashdata('success') ?>"
+				});
+			<?php endif; ?>
+		});
+	</script>
 
 </body>
 

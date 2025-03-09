@@ -20,7 +20,7 @@ class Schedule_model extends CI_Model
 			$this->db->join('members', 'schedules.user_id = members.id', 'left');
 			$this->db->group_by('schedules.id');
 		}
-
+		
 		$query = $this->db->get();
 
 		if (!$query) {

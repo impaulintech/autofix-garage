@@ -128,7 +128,7 @@
 							</button>
 						</div>
 					</div>
- 
+
 					<form action="<?= site_url('health/add') ?>" method="post">
 						<div class="modal-body">
 							<div class="row">
@@ -246,39 +246,96 @@
 								});
 							</script>
 							<br>
-
 							<div class="row">
-								<div class="col">
-									<label for="services">Select Mechanic:</label>
+								<div class="col-md-6">
+									<label for="mechanic">Select Mechanic:</label>
 									<select class="form-control" name="mechanic" id="mechanic" required>
 										<option value="">Select a mechanic</option>
 									</select>
 								</div>
+								<div class="col-md-6">
+									<label>Specialties:</label>
+									<p id="specialtyText" class="text-muted">Select a mechanic to see their specialty.</p>
+								</div>
 							</div>
 
 							<script>
-								const mechanics = [
-									"Jose Reyes",
-									"Carlos Dela Cruz",
-									"Maria Santos",
-									"Antonio Garcia",
-									"Juanito Lopez",
-									"Liza Torres",
-									"Ernesto Aquino",
-									"Ricardo Fernandez",
-									"Emilia Bautista",
-									"Dante Villanueva"
+								const mechanics = [{
+										name: "Jose Reyes",
+										specialty: "Engine Repair, Brake Systems"
+									},
+									{
+										name: "Carlos Dela Cruz",
+										specialty: "Transmission, Suspension"
+									},
+									{
+										name: "Maria Santos",
+										specialty: "Electrical Systems, AC Repair"
+									},
+									{
+										name: "Antonio Garcia",
+										specialty: "Oil Change, Tire Rotation"
+									},
+									{
+										name: "Juanito Lopez",
+										specialty: "Body Work, Painting"
+									},
+									{
+										name: "Liza Torres",
+										specialty: "Hybrid Vehicles, Diagnostics"
+									},
+									{
+										name: "Ernesto Aquino",
+										specialty: "Performance Tuning, Exhaust Systems"
+									},
+									{
+										name: "Ricardo Fernandez",
+										specialty: "Diesel Engines, Heavy Equipment"
+									},
+									{
+										name: "Emilia Bautista",
+										specialty: "Battery Services, Wiring"
+									},
+									{
+										name: "Dante Villanueva",
+										specialty: "Cooling Systems, Radiators"
+									}
 								];
 
 								const mechanicSelect = document.getElementById('mechanic');
+								const specialtyText = document.getElementById('specialtyText');
 
 								mechanics.forEach(mechanic => {
 									const option = document.createElement('option');
-									option.value = mechanic;
-									option.textContent = mechanic;
+									option.value = mechanic.name;
+									option.textContent = mechanic.name;
 									mechanicSelect.appendChild(option);
 								});
+
+								mechanicSelect.addEventListener('change', function() {
+									const selectedMechanic = mechanics.find(m => m.name === this.value);
+									specialtyText.innerHTML = selectedMechanic ? `: ${selectedMechanic.specialty}` : "Select a mechanic to see their specialty.";
+								});
 							</script>
+
+							<br>
+							<div class="row">
+								<div class="col">
+									<label for="carType">Car Type:</label>
+									<select class="form-control" name="carType" id="carType" required>
+										<option value="">Select type</option>
+										<option value="automatic">Automatic</option>
+										<option value="manual">Manual</option>
+									</select>
+								</div>
+							</div>
+							<br>
+							<div class="row">
+								<div class="col">
+									<label for="carModel">Car Model:</label>
+									<input type="text" class="form-control" name="carModel" id="carModel" placeholder="Enter car model" required>
+								</div>
+							</div>
 							<br>
 							<div class="row">
 								<div class="col">

@@ -79,9 +79,9 @@
 					<!-- Display current user's appointments -->
 					<div class="mt-3">
 						<h4>Your Appointments</h4>
-						<ul class="list-group">
+						<ul class="list-group" style="max-height: 540px; overflow: scroll;">
 							<?php if (!empty($schedules)): ?>
-								<?php foreach ($schedules as $schedule): ?>
+								<?php foreach (array_reverse($schedules) as $schedule): ?>
 									<li class="list-group-item text-left">
 										<?php echo date('Y-m-d H:i', strtotime($schedule['date_from'] . ' ' . $schedule['time_from'])); ?>
 										<ul><?php foreach (explode(',', $schedule['dow']) as $dow) echo "<li>" . htmlspecialchars(trim($dow)) . "</li>"; ?></ul>

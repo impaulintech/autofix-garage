@@ -44,7 +44,7 @@ class Register extends CI_Controller
 				'address' => $this->input->post('address'),
 				'contact' => $this->input->post('contact'),
 				'email' => $this->input->post('email'),
-				'role_id' => 3,
+				'role_id' => 2,
 				'createdAt' => date('Y-m-d H:i:s'),
 			);
 

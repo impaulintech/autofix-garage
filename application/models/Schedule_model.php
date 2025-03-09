@@ -9,10 +9,18 @@ class Schedule_model extends CI_Model
 
 	public function getAllSchedules()
 	{
-		$this->db->select('schedules.id AS schedule_id, schedules.*, members.*');
-		$this->db->from('schedules');
-		$this->db->join('members', 'schedules.user_id = members.id', 'left');
-		$this->db->group_by('schedules.id');
+		if ($this->session->all_userdata()['role_id'] == 4) {
+			$this->db->select('schedules.id AS schedule_id, schedules.*, employee.*');
+			$this->db->from('schedules');
+			$this->db->join('employee', 'schedules.user_id = employee.emp_id', 'left');
+			$this->db->group_by('schedules.id');
+		} else {
+			$this->db->select('schedules.id AS schedule_id, schedules.*, members.*');
+			$this->db->from('schedules');
+			$this->db->join('members', 'schedules.user_id = members.id', 'left');
+			$this->db->group_by('schedules.id');
+		}
+
 		$query = $this->db->get();
 
 		if (!$query) {

@@ -128,13 +128,12 @@
 							</button>
 						</div>
 					</div>
-
+ 
 					<form action="<?= site_url('health/add') ?>" method="post">
 						<div class="modal-body">
 							<div class="row">
 								<div class="col">
-									<label for="member_id">Member Id:</label>
-									<input type="text" value="<?= $member_id ?>" class="form-control" placeholder="Member Id" id="member_id" name="member_id" readonly>
+									<input type="text" value="<?= $this->session->userdata('emp_id') ?>" class="form-control" placeholder="<?= $this->session->userdata('emp_id') ?>" id="member_id" name="member_id" hidden readonly>
 								</div>
 							</div>
 							<br>

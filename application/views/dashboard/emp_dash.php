@@ -92,6 +92,13 @@
 										<?php elseif ($schedule['status'] == 2): ?>
 											<span class="badge bg-danger float-right" style="padding: 6px">Cancelled</span>
 										<?php endif; ?>
+
+										<?php if ($schedule['status'] != 2): ?>
+											<button class="btn btn-danger cancel-btn"
+												data-id="<?= $schedule['schedule_id']; ?>">
+												Cancel
+											</button>
+										<?php endif; ?>
 									</li>
 								<?php endforeach; ?>
 							<?php else: ?>
@@ -107,6 +114,68 @@
 				<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
 
 				<script>
+					document.addEventListener('click', function(e) {
+						if (e.target.classList.contains('cancel-btn')) {
+							const scheduleId = e.target.getAttribute('data-id');
+
+							Swal.fire({
+								title: "Cancel Schedule",
+								text: "Are you sure you want to cancel your schedule?",
+								icon: "warning",
+								showCancelButton: true,
+								confirmButtonColor: "#d33",
+								cancelButtonColor: "#6c757d",
+								confirmButtonText: "Yes, Cancel It",
+								cancelButtonText: "No, Keep It"
+							}).then((result) => {
+								if (result.isConfirmed) {
+									cancelSchedule(scheduleId);
+								}
+							});
+						}
+					});
+
+					function cancelSchedule(scheduleId) {
+						const devURL = window.location.origin + window.location.pathname;
+
+						$.ajax({
+							url: devURL + '/../api/schedules/cancel_schedule',
+							method: 'POST',
+							data: {
+								id: scheduleId,
+							},
+							success: function(response) {
+								const res = JSON.parse(response);
+								if (res.success) {
+									Swal.fire({
+										title: "Canceled!",
+										text: res.message,
+										icon: "success",
+										confirmButtonColor: "#3085d6"
+									}).then(() => {
+										location.reload();
+									});
+								} else {
+									Swal.fire({
+										title: "Error",
+										text: res.message,
+										icon: "error",
+										confirmButtonColor: "#d33"
+									});
+								}
+							},
+							error: function(xhr, status, error) {
+								console.error('Error canceling schedule:', error);
+								Swal.fire({
+									title: "Error",
+									text: "An error occurred while trying to cancel the schedule.",
+									icon: "error",
+									confirmButtonColor: "#d33"
+								});
+							}
+						});
+					}
+
 					function openModals(title, service, status) {
 						const serviceList = service.split(',').map(s => `<li>${s}</li>`).join('');
 						let statusMessage = (status == 2) ? 'Cancelled' : (status == '0' ? 'Pending for Approval' : 'Approved');
@@ -168,25 +237,25 @@
 <script src="<?= base_url('assets/js/jquery.js') ?>"></script>
 
 <script>
-  $(document).ready(function () {
-    <?php if ($this->session->flashdata('success')): ?>
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        color: '#333',
-        iconColor: '#48c78e',
-        customClass: {
-          popup: 'small-toast'
-        }
-      });
+	$(document).ready(function() {
+		<?php if ($this->session->flashdata('success')): ?>
+			const Toast = Swal.mixin({
+				toast: true,
+				position: 'top-end',
+				showConfirmButton: false,
+				timer: 3000,
+				timerProgressBar: true,
+				color: '#333',
+				iconColor: '#48c78e',
+				customClass: {
+					popup: 'small-toast'
+				}
+			});
 
-      Toast.fire({
-        icon: 'success',
-        title: "<?= $this->session->flashdata('success') ?>"
-      });
-    <?php endif; ?>
-  });
+			Toast.fire({
+				icon: 'success',
+				title: "<?= $this->session->flashdata('success') ?>"
+			});
+		<?php endif; ?>
+	});
 </script>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 22, 2024 at 02:37 AM
+-- Generation Time: Mar 09, 2025 at 07:22 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.5
 
@@ -22,14 +22,6 @@ SET time_zone = "+00:00";
 --
 
 -- --------------------------------------------------------
-
---
--- Table structure for table `employee`
---
-
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`garage` /*!40100 DEFAULT CHARACTER SET utf8 */;
-
-USE `garage`;
 
 --
 -- Table structure for table `employee`
@@ -64,12 +56,27 @@ INSERT INTO `employee` (`emp_id`, `lname`, `fname`, `mname`, `address`, `contact
 (4, 'rawr', 'rawr', 'rawr', 'rawr', '12312344553', NULL, '2023-12-01 13:29:22', NULL, NULL, NULL, NULL, NULL, 0, 1),
 (5, 'Fajardo', 'Ryan', 'Parulan', 'Pandi', '09123892892', 'tikoyryan@gmail.com', '2023-12-14 13:36:17', NULL, NULL, NULL, NULL, NULL, 0, 4),
 (10023, 'Roque', 'Prince', 'rawr', 'Poblacion', '09123456789', NULL, '2023-12-14 06:04:28', NULL, NULL, NULL, NULL, NULL, 0, 1),
-(10024, 'man', 'bat', 'is', 'Gotham', '09215762587', 'batman@gmail.com', '2023-12-15 08:19:58', 3, '2023-12-15 02:56:26', 3, NULL, NULL, 0, 4),
-(10025, 'Su', 'Gang', 'Gung', 'Caypombo', '09123456723', NULL, '2023-12-15 09:28:58', 3, NULL, NULL, NULL, NULL, 0, 4),
-(10026, 'Escote', 'Nino', 'Alvarado', 'Pandi', '09215762998', 'astig@gmail.com', '2023-12-15 09:30:23', 2, '2024-05-28 08:50:13', 2, NULL, NULL, 0, 4),
+(10024, 'man', 'bat', 'is', 'Gotham', '09215762587', 'batman@gmail.com', '2023-12-15 08:19:58', 3, '2023-12-15 02:56:26', 3, NULL, NULL, 0, 2),
+(10025, 'Su', 'Gang', 'Gung', 'Caypombo', '09123456723', NULL, '2023-12-15 09:28:58', 3, NULL, NULL, '2025-03-09 05:17:37', 10042, 1, 4),
+(10026, 'Escote', 'Nino', 'Alvarado', 'Pandi', '09215762998', 'astig@gmail.com', '2023-12-15 09:30:23', 2, '2024-05-28 08:50:13', 2, '2025-03-09 05:17:37', 10042, 1, 4),
 (10027, 'Admin', 'User', '', 'Poblacion', '09123456654', NULL, '2023-12-15 09:34:32', 2, NULL, NULL, '2023-12-17 06:55:33', 3, 1, 3),
-(10028, 'Fischer', 'Jamal', 'Gwendolyn Norman', 'Qui deleniti odio la', '967', 'dujibaso@mailinator.com', '2024-09-21 10:04:05', 10027, '2024-09-21 10:04:17', 10027, NULL, NULL, 0, 3),
-(10030, 'Henson', 'Gannon', 'Halee Patrick', 'Tempor dolorem sed c', '+1 (524) 856-73', 'qodeka@mailinator.com', '2024-10-14 00:01:03', NULL, NULL, NULL, NULL, NULL, 0, 1);
+(10028, 'Fischer', 'Jamal', 'Gwendolyn Norman', 'Qui deleniti odio la', '967', 'dujibaso@mailinator.com', '2024-09-21 10:04:05', 10027, '2024-09-21 10:04:17', 10027, '2025-03-09 05:17:38', 10042, 1, 3),
+(10030, 'Henson', 'Gannon', 'Halee Patrick', 'Tempor dolorem sed c', '+1 (524) 856-73', 'qodeka@mailinator.com', '2024-10-14 00:01:03', NULL, NULL, NULL, '2025-03-09 05:17:38', 10042, 1, 1),
+(10031, 'Skinner', 'Quinn', 'Michelle Vega', 'Quia in veniam quo', '+1 (629) 664-18', 'kysupopym@mailinator.com', '2024-10-14 07:43:11', NULL, NULL, NULL, '2025-03-09 05:17:39', 10042, 1, 3),
+(10032, 'Williams', 'Taylor', 'Nash Sargent', 'Quia nisi culpa quo', '+1 (247) 611-68', 'wojaq@mailinator.com', '2025-03-06 04:40:09', NULL, NULL, NULL, '2025-03-09 05:17:39', 10042, 1, 3),
+(10033, 'Barker', 'Reece', 'Cora Ford', 'Quia id enim labore', '+1 (607) 609-73', 'nola@mailinator.com', '2025-03-06 06:50:41', NULL, NULL, NULL, '2025-03-09 05:17:39', 10042, 1, 3),
+(10034, 'French', 'Angela', 'Alec Wolfe', 'Pariatur Minima exc', '+1 (695) 191-22', 'lodipi@mailinator.com', '2025-03-06 06:51:40', NULL, NULL, NULL, '2025-03-09 05:17:40', 10042, 1, 3),
+(10035, 'Leach', 'Basil', 'Seth Reid', 'Voluptates quod exer', '+1 (749) 741-44', 'wecy@mailinator.com', '2025-03-06 06:51:59', NULL, NULL, NULL, '2025-03-09 05:17:40', 10042, 1, 3),
+(10036, 'Hebert', 'Isadora', 'Lewis Leon', 'Ratione velit volupt', '+1 (549) 673-55', 'zehaxaqyh@mailinator.com', '2025-03-06 06:54:10', NULL, NULL, NULL, '2025-03-09 05:17:40', 10042, 1, 3),
+(10037, 'Langley', 'Illiana', 'Wynter Davenport', 'Omnis sit in qui ir', '+1 (678) 774-63', 'macetyw@mailinator.com', '2025-03-06 06:54:26', NULL, NULL, NULL, '2025-03-09 05:17:41', 10042, 1, 3),
+(10038, 'Peterson', 'Otto', 'Sopoline Duran', 'Perferendis magna fu', '+1 (264) 525-87', 'mywoxohuh@mailinator.com', '2025-03-06 06:54:55', NULL, NULL, NULL, '2025-03-09 05:17:41', 10042, 1, 3),
+(10039, 'Delgado', 'Candice', 'Finn Mcclain', 'Tempora iure nihil l', '+1 (159) 979-96', 'dohuhadeci@mailinator.com', '2025-03-06 06:55:41', NULL, NULL, NULL, '2025-03-09 05:17:42', 10042, 1, 3),
+(10040, 'Cleveland', 'Oliver', 'Ramona Villarreal', 'Voluptatum sint sit', '+1 (621) 182-35', 'goguliw@mailinator.com', '2025-03-06 07:00:52', NULL, NULL, NULL, '2025-03-09 05:17:42', 10042, 1, 3),
+(10041, 'Stephens', 'Marvin', 'Meghan Montgomery', 'Sed officia autem re', '+1 (574) 359-55', 'golyn@mailinator.com', '2025-03-09 17:05:48', NULL, NULL, NULL, '2025-03-09 05:17:43', 10042, 1, 3),
+(10042, 'Daniel', 'Magee', 'Tatyana Sloan', 'Non consectetur vit', '+1 (691) 758-60', 'hyqari@mailinator.com', '2025-03-09 17:14:25', NULL, NULL, NULL, '2025-03-09 05:17:47', 10042, 1, 3),
+(10043, 'Hurst', 'Noble', 'Channing Perez', 'Iure nihil architect', '+1 (851) 758-88', 'wemisocyku@mailinator.com', '2025-03-09 17:35:34', NULL, NULL, NULL, NULL, NULL, 0, 2),
+(10044, 'Pittman', 'Owen', 'Harper Moss', 'Facilis in nisi cumq', '+1 (447) 901-91', 'webuqoleq@mailinator.com', '2025-03-09 17:50:08', NULL, NULL, NULL, NULL, NULL, 0, 2),
+(10045, 'Calderon', 'Wallace', 'Leah Norton', 'Ad quaerat mollitia', '+1 (669) 345-14', 'kibid@mailinator.com', '2025-03-09 18:13:08', NULL, NULL, NULL, NULL, NULL, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -122,6 +129,24 @@ INSERT INTO `illness` (`ill_id`, `ill_name`, `contagious`, `danger_level`) VALUE
 (4, 'Migrane', 'No', 1),
 (5, 'Cancer', 'No', 10),
 (6, 'Aids', 'Yes', 7);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ismaintenance`
+--
+
+CREATE TABLE `ismaintenance` (
+  `id` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `ismaintenance`
+--
+
+INSERT INTO `ismaintenance` (`id`, `status`) VALUES
+(1, 0);
 
 -- --------------------------------------------------------
 
@@ -289,23 +314,6 @@ CREATE TABLE `schedule` (
   `status` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `schedule`
---
-
-INSERT INTO `schedule` (`id`, `fname`, `lname`, `mname`, `address`, `contact`, `email`, `createdAt`, `createdBy`, `updatedAt`, `updatedBy`, `deletedAt`, `deletedBy`, `is_deleted`, `status`) VALUES
-(1, 'John', 'Doe', 'A', '123 Main St', '09123456789', 'johndoe@email.com', '2024-09-21 16:15:27', 1, '2024-09-21 16:15:27', 1, NULL, NULL, 0, 0),
-(2, 'Jane', 'Smith', 'B', '456 Elm St', '09123456788', 'janesmith@email.com', '2024-09-21 16:20:30', 1, '2024-09-21 16:20:30', 1, NULL, NULL, 0, 0),
-(3, 'Alice', 'Johnson', 'C', '789 Oak St', '09123456787', 'alicejohnson@email.com', '2024-09-21 16:25:45', 1, '2024-09-21 16:25:45', 1, NULL, NULL, 0, 0),
-(4, 'Bob', 'Brown', 'D', '135 Maple St', '09123456786', 'bobbrown@email.com', '2024-09-21 16:30:12', 1, '2024-09-21 16:30:12', 1, NULL, NULL, 0, 0),
-(5, 'Charlie', 'Davis', 'E', '246 Pine St', '09123456785', 'charliedavis@email.com', '2024-09-21 16:35:00', 1, '2024-09-21 16:35:00', 1, NULL, NULL, 0, 0),
-(6, 'David', 'Wilson', 'F', '357 Cedar St', '09123456784', 'davidwilson@email.com', '2024-09-21 16:40:22', 1, '2024-09-21 16:40:22', 1, NULL, NULL, 0, 0),
-(7, 'Eve', 'Martinez', 'G', '468 Birch St', '09123456783', 'evemartinez@email.com', '2024-09-21 16:45:55', 1, '2024-09-21 16:45:55', 1, NULL, NULL, 0, 0),
-(8, 'Frank', 'Anderson', 'H', '579 Spruce St', '09123456782', 'frankanderson@email.com', '2024-09-21 16:50:18', 1, '2024-09-21 16:50:18', 1, NULL, NULL, 0, 0),
-(9, 'Grace', 'Thomas', 'I', '680 Fir St', '09123456781', 'gracethomas@email.com', '2024-09-21 16:55:35', 1, '2024-09-21 16:55:35', 1, NULL, NULL, 0, 0),
-(10, 'Hank', 'Taylor', 'J', '791 Willow St', '09123456780', 'hanktaylor@email.com', '2024-09-21 17:00:50', 1, '2024-09-21 17:00:50', 1, NULL, NULL, 0, 0),
-(11, 'John', 'Doe', 'A', '123 Main St', '09123456789', 'johndoe@email.com', '2024-09-21 16:15:27', 1, '2024-09-21 16:15:27', 1, NULL, NULL, 0, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -320,20 +328,20 @@ CREATE TABLE `schedules` (
   `date_from` date NOT NULL,
   `date_to` date NOT NULL,
   `time_from` time NOT NULL,
-  `time_to` time NOT NULL
+  `time_to` time NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `mechanic` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `model` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `schedules`
 --
 
-INSERT INTO `schedules` (`id`, `user_id`, `full_name`, `dow`, `date_from`, `date_to`, `time_from`, `time_to`) VALUES
-(4, 8, 'test user', 'Injector Testing and Cleaning', '2024-09-21', '2024-09-21', '15:00:00', '16:00:00'),
-(16, 8, 'test user 4', 'Underwash', '2024-10-03', '2024-10-03', '06:08:00', '06:08:00'),
-(17, 8, 'test', 'Vulcanizing', '2024-09-25', '2024-09-25', '00:19:00', '00:19:00'),
-(18, 8, 'test', 'Car Wash', '2024-09-19', '2024-09-19', '08:30:00', '08:30:00'),
-(19, 0, 'Jared Daniels', 'Wheel Alignment', '1971-06-24', '1971-06-24', '18:26:00', '18:26:00'),
-(20, 0, 'Jemima Huber', 'Vulcanizing', '2024-10-14', '2024-10-14', '20:10:00', '20:10:00');
+INSERT INTO `schedules` (`id`, `user_id`, `full_name`, `dow`, `date_from`, `date_to`, `time_from`, `time_to`, `status`, `mechanic`, `type`, `model`) VALUES
+(33, 10043, 'Hurst Noble', 'Injector Testing and Cleaning - ₱1800, Wheel Alignment - ₱800, Brake and Suspension Services - ₱1200', '2025-03-10', '2025-03-10', '05:12:00', '05:12:00', 2, 'Ricardo Fernandez', 'automatic', 'Vios'),
+(39, 10045, 'Calderon Wallace', 'OBD Scanning - ₱500, Electronic Troubleshooting - ₱1200, ECU Remapping - ₱3000, DPF, DPD, EGR Removal - ₱2500, Engine Overhauling - ₱7000, Wheel Alignment - ₱800, Wheel Balancing - ₱500, Ceramic Coating - ₱5000, Underwash - ₱350', '2018-06-12', '2018-06-12', '06:33:00', '06:33:00', 0, 'Maria Santos', 'automatic', 'Vios');
 
 -- --------------------------------------------------------
 
@@ -384,10 +392,12 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`user_id`, `username`, `password`, `lastLogin`, `createdAt`, `createdBy`, `updatedAt`, `updatedBy`, `deletedAt`, `deletedBy`, `is_deleted`, `active`, `emp_id`) VALUES
 (1, 'memen', '12345', NULL, '2023-12-14 14:25:09', NULL, '2023-12-16 12:27:47', 3, NULL, NULL, 0, 0, 3),
-(2, 'tikoy', '123', NULL, '2023-12-14 14:25:37', NULL, NULL, NULL, '2024-10-14 12:44:25', 3, 1, 0, 5),
+(2, 'test2', 'test', NULL, '2023-12-14 14:25:37', NULL, NULL, NULL, NULL, NULL, NULL, 1, 5),
 (3, 'admin', 'admin', NULL, '2023-12-14 14:26:26', NULL, NULL, NULL, NULL, NULL, 0, 1, 3),
-(4, 'test', 'test', NULL, '2023-12-15 03:50:19', NULL, '2024-05-27 04:58:55', 5, NULL, NULL, 0, 1, 10023),
-(1117, 'mewigi', 'test', NULL, '2024-10-14 00:01:03', NULL, NULL, NULL, NULL, NULL, 0, 1, 10030);
+(1129, 'sidozebyze', 'sidozebyze', NULL, '2025-03-09 17:14:25', NULL, NULL, NULL, NULL, NULL, 0, 1, 10024),
+(1131, 'xequmotaky', 'xequmotaky', NULL, '2025-03-09 17:50:08', NULL, NULL, NULL, NULL, NULL, 0, 0, 10044),
+(1132, 'derawabuje', 'derawabuje', NULL, '2025-03-09 17:35:34', NULL, NULL, NULL, NULL, NULL, 0, 1, 10043),
+(10044, 'patofigyso', 'patofigyso', NULL, '2025-03-09 18:13:08', NULL, NULL, NULL, NULL, NULL, 0, 1, 10045);
 
 -- --------------------------------------------------------
 
@@ -408,7 +418,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `username`, `password`, `type`) VALUES
-(1, 'Administrator', 'admin', 'admin', 1);
+(1, 'Administrator', 'admin', 'admin2', 1);
 
 --
 -- Indexes for dumped tables
@@ -433,6 +443,12 @@ ALTER TABLE `health`
 --
 ALTER TABLE `illness`
   ADD PRIMARY KEY (`ill_id`);
+
+--
+-- Indexes for table `ismaintenance`
+--
+ALTER TABLE `ismaintenance`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `members`
@@ -503,7 +519,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `emp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10031;
+  MODIFY `emp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10046;
 
 --
 -- AUTO_INCREMENT for table `health`
@@ -516,6 +532,12 @@ ALTER TABLE `health`
 --
 ALTER TABLE `illness`
   MODIFY `ill_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `ismaintenance`
+--
+ALTER TABLE `ismaintenance`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `members`
@@ -551,7 +573,7 @@ ALTER TABLE `registration_info`
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `trainers`
@@ -563,7 +585,7 @@ ALTER TABLE `trainers`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1118;
+  MODIFY `user_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10045;
 
 --
 -- AUTO_INCREMENT for table `users`

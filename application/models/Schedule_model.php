@@ -6,21 +6,24 @@ class Schedule_model extends CI_Model
 		parent::__construct();
 		$this->table = 'health';
 	}
-
 	public function getAllSchedules()
 	{
-		if ($this->session->all_userdata()['role_id'] == 4) {
+		$user_id = $this->session->userdata('user_id');
+		$role_id = $this->session->userdata('role_id');
+
+		if ($role_id == 4) {
 			$this->db->select('schedules.id AS schedule_id, schedules.*, employee.*');
 			$this->db->from('schedules');
 			$this->db->join('employee', 'schedules.user_id = employee.emp_id', 'left');
-			$this->db->group_by('schedules.id');
 		} else {
 			$this->db->select('schedules.id AS schedule_id, schedules.*, members.*');
 			$this->db->from('schedules');
 			$this->db->join('members', 'schedules.user_id = members.id', 'left');
-			$this->db->group_by('schedules.id');
+			$this->db->where('schedules.user_id', $user_id); // Filter for the logged-in user
 		}
-		
+
+		$this->db->group_by('schedules.id');
+
 		$query = $this->db->get();
 
 		if (!$query) {
@@ -42,6 +45,7 @@ class Schedule_model extends CI_Model
 			'totalThisWeek' => $totalThisWeek,
 		];
 	}
+
 
 
 

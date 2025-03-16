@@ -206,7 +206,7 @@ class health extends CI_Controller
 		$result = $this->Schedule_model->updateScheduleStatus($schedule_id, $data);
 
 		if ($result) {
-			$this->session->set_flashdata('msg', 'Schedule has been approved successfully.');
+			$this->session->set_flashdata('msg', 'Schedule has been approved successfully!');
 			redirect('dashboard');
 		} else {
 			$this->session->set_flashdata('msg', 'Failed to approve the schedule.');

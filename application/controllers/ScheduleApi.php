@@ -159,7 +159,7 @@ class ScheduleApi extends CI_Controller
 			$servicesList .= "</ul>";
 
 			$greeting = $isAdmin ? "Hello, Admin!" : "Hello, $recipientName!";
-			$introText = $isAdmin ? "The following appointment has been cancelled by {$scheduleDetails['full_name']}." : "Your scheduled appointment has been cancelled.";
+			$introText = $isAdmin ? "The following appointment has been cancelled, client: {$scheduleDetails['full_name']}." : "Your scheduled appointment has been cancelled.";
 
 			$mail->Body = ""
 				. "<div style='font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4;'>"
@@ -209,7 +209,24 @@ class ScheduleApi extends CI_Controller
 			return;
 		}
 
-		$scheduleDetails['email'] = $this->session->userdata('email') ?? null;
+
+		$query = $this->db->select('emp_id')->where('user_id', $scheduleDetails['user_id'])->get('user');
+		$user = $query->row_array();
+
+		if (!$user) {
+			echo json_encode(array('success' => false, 'message' => 'User not found.'));
+			return;
+		}
+
+		$query = $this->db->select('email')->where('emp_id', $user['emp_id'])->get('employee');
+		$employee = $query->row_array();
+
+		if (!$employee) {
+			echo json_encode(array('success' => false, 'message' => 'Employee not found.'));
+			return;
+		}
+
+		$scheduleDetails['email'] = $employee['email'];
 		$scheduleDetails['full_name'] = $scheduleDetails['full_name'] ?? 'Unknown User';
 		$scheduleDetails['dow'] = $scheduleDetails['dow'] ?? '';
 		$scheduleDetails['mechanic'] = $scheduleDetails['mechanic'] ?? 'N/A';

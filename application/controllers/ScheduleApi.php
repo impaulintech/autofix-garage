@@ -126,7 +126,8 @@ class ScheduleApi extends CI_Controller
 		if ($result) {
 			$this->sendApprovalEmail($scheduleDetails['email'], $scheduleDetails['full_name'], $scheduleDetails);
 
-			echo json_encode(array('success' => true, 'message' => 'Schedule cancellation has been approved successfully!'));
+			$this->session->set_flashdata('alert', ['type' => 'success', 'message' => 'Schedule has been approved successfully!']);
+			echo json_encode(array('success' => true, 'message' => 'Schedule has been approved successfully!'));
 		} else {
 			echo json_encode(array('success' => false, 'message' => 'Failed to approve the schedule.'));
 		}
@@ -256,6 +257,7 @@ class ScheduleApi extends CI_Controller
 
 			$this->sendCancellationEmail('garageautofix022@gmail.com', 'Admin', $scheduleDetails, true);
 
+			$this->session->set_flashdata('alert', ['type' => 'success', 'message' => 'Schedule has been cancelled successfully.']);
 			echo json_encode(array('success' => true, 'message' => 'Schedule has been cancelled successfully.'));
 		} else {
 			echo json_encode(array('success' => false, 'message' => 'Failed to cancel the schedule.'));

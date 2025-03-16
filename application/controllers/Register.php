@@ -1,4 +1,12 @@
 <?php
+require 'PHPMail/src/PHPMailer.php';
+require 'PHPMail/src/SMTP.php';
+require 'PHPMail/src/Exception.php';
+
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Register extends CI_Controller
@@ -13,6 +21,48 @@ class Register extends CI_Controller
 	public function index()
 	{
 		$this->load->view('register/index');
+	}
+	function sendRegistrationEmail($recipientEmail, $recipientName)
+	{
+		$mail = new PHPMailer(true);
+
+		try {
+			$mail->isSMTP();
+			$mail->Host = 'smtp.gmail.com';
+			$mail->SMTPAuth = true;
+			$mail->Username = 'garageautofix022@gmail.com';
+			$mail->Password = 'wiuafhorurleezig';
+			$mail->SMTPSecure = 'tls';
+			$mail->Port = 587;
+
+			$mail->setFrom('garageautofix022@gmail.com', 'Autofix Garage');
+			$mail->addAddress($recipientEmail, $recipientName);
+			$mail->isHTML(true);
+			$mail->Subject = 'Welcome to Autofix Garage!';
+
+			$mail->Body = ""
+				. "<div style='font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4;'>"
+				. "<div style='background: white; padding: 20px; border-radius: 10px;'>"
+				. "<h2 style='color: #007bff;'>Welcome, $recipientName!</h2>"
+				. "<p>Thank you for registering at Autofix Garage. Your account has been successfully created.</p>"
+				. "<p>You can now log in and start using our services.</p>"
+				. "<p style='text-align: center;'><a href='http://yourwebsite.com/login' style='padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;'>Login Now</a></p>"
+				. "<p style='text-align: center;'>If you have any questions, feel free to contact us at <a href='mailto:garageautofix022@gmail.com'>garageautofix022@gmail.com</a>.</p>"
+				. "</div></div>";
+
+			$mail->SMTPOptions = [
+				'ssl' => [
+					'verify_peer' => false,
+					'verify_peer_name' => false,
+					'allow_self_signed' => true,
+				],
+			];
+
+			return $mail->send();
+		} catch (Exception $e) {
+			error_log('Mailer Exception: ' . $e->getMessage());
+			return false;
+		}
 	}
 
 	public function register()
@@ -49,6 +99,9 @@ class Register extends CI_Controller
 			);
 
 			if ($this->Register_model->register($employee_data, $user_data)) {
+				$recipientName = $this->input->post('fname') . ' ' . $this->input->post('lname');
+				$this->sendRegistrationEmail($this->input->post('email'), $recipientName);
+
 				$this->session->set_flashdata('alert', ['type' => 'success', 'message' => 'Registration successful! You can now log in.']);
 				redirect('register');
 			} else {

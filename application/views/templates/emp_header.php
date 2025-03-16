@@ -340,7 +340,7 @@
 							<div class="row">
 								<div class="col">
 									<label for="appointment_date">Date of Appointment:</label>
-									<input type="date" class="form-control" id="appointment_date" name="appointment_date" required="">
+									<input type="date" class="form-control" id="appointment_date" name="appointment_date" required="" min="<?= date('Y-m-d'); ?>">
 								</div>
 							</div>
 							<br>

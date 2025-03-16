@@ -46,9 +46,6 @@ class Schedule_model extends CI_Model
 		];
 	}
 
-
-
-
 	public function getSchedulesForToday()
 	{
 		$this->db->where('DATE(date_from)', date('Y-m-d'));
@@ -68,6 +65,19 @@ class Schedule_model extends CI_Model
 		$this->db->where('sch_id', $sch_id);
 		$query = $this->db->get('Schedule');
 		return $query->row();
+	}
+
+
+	public function getScheduleById($schedule_id)
+	{
+		$this->db->where('id', $schedule_id);
+		$query = $this->db->get('schedules');
+
+		if ($query->num_rows() > 0) {
+			return $query->row_array();
+		} else {
+			return null;
+		}
 	}
 
 	public function addSchedule($data)

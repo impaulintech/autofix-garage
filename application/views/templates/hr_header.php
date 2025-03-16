@@ -23,7 +23,9 @@
 
 	<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
 		<!-- Brand -->
-		<h3 class="navbar-brand py-3">AUTOFIX GARAGE</h3>
+		<a href="index.php">
+			<h3 class="navbar-brand py-3">AUTOFIX GARAGE</h3>
+		</a>
 		</hr>
 		<!-- Toggler/collapsibe Button -->
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">

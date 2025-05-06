@@ -155,28 +155,30 @@ class health extends CI_Controller
 		$services = $this->input->post('services');
 		$dow = is_array($services) ? implode(", ", $services) : $services;
 		$mechanics = $this->input->post('mechanics');
- 		$mechanicList = is_array($mechanics) ? implode(", ", $mechanics) : $mechanics;
- 
+		$mechanicList = is_array($mechanics) ? implode(", ", $mechanics) : $mechanics;
+
 		if (empty($mechanics)) {
 			$this->session->set_flashdata('msg', 'Please select at least one mechanic.');
 			redirect('dashboard');
 			return;
 		}
- 
+
 		$scheduleDetails = [
 			'dow' => $dow,
-			'mechanic' => $mechanicList, 
+			'mechanic' => $mechanicList,
 			'date_from' => $this->input->post('appointment_date'),
 			'date_to' => $this->input->post('appointment_date'),
 			'time_from' => $this->input->post('appointment_time'),
 			'time_to' => $this->input->post('appointment_time'),
+			'type' => $this->input->post('carType'),
+			'model' => $this->input->post('carModel')
 		];
- 
+
 		$this->sendEmailToClient($this->session->userdata('email'), $full_name, $scheduleDetails);
 		$this->sendEmailToAdmin('garageautofix022@gmail.com', 'Admin', $scheduleDetails);
- 
+
 		$data = array_merge(['user_id' => $this->input->post('member_id'), 'full_name' => $full_name], $scheduleDetails);
- 
+
 		$result = $this->Schedule_model->addSchedule($data);
 		if ($result) {
 			$this->session->set_flashdata('msg', 'Appointment scheduled successfully');

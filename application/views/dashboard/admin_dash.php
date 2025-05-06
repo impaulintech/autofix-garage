@@ -229,75 +229,101 @@
 						<!-- Modal -->
 						<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"></script>
 
+						<!-- Replace your existing modal with this one -->
 						<div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
 							<div class="modal-dialog">
 								<div class="modal-content" style="width: 100%;">
 									<div class="modal-header">
 										<h5 class="modal-title" id="scheduleModalLabel">Client Schedule Details</h5>
 									</div>
-									<div class="modal-body">
-										<p><strong>Customer Name:</strong> <span id="modalName"></span></p>
-										<p><strong>Contact:</strong> <span id="modalContact"></span></p>
-										<p><strong>Address:</strong> <span id="modalAddress"></span></p>
-										<p><strong>Schedule:</strong> <span id="modalSchedule"></span></p>
-										<p><strong>Car Type:</strong> <span id="modalCarType"></span></p>
-										<p><strong>Car Model:</strong> <span id="modalCarModel"></span></p>
-										<p><strong>Mechanic:</strong> <span id="modalMechanic"></span></p>
-										<p><strong>Mechanic Specialty:</strong> <span id="modalSpecialty"></span></p>
-										<p><strong>Service:</strong></p>
-										<ul id="modalServiceList"></ul>
-										<p><strong>Status:</strong> <span id="modalStatus"></span></p>
+									<div class="modal-body" id="printableContent">
+										<div class="row mb-3">
+											<div class="col-md-6">
+												<p><strong>Customer Name:</strong> <span id="modalName"></span></p>
+												<p><strong>Contact:</strong> <span id="modalContact"></span></p>
+												<p><strong>Address:</strong> <span id="modalAddress"></span></p>
+											</div>
+											<div class="col-md-6">
+												<p><strong>Schedule Date:</strong> <span id="modalDate"></span></p>
+												<p><strong>Schedule Time:</strong> <span id="modalTime"></span></p>
+												<p><strong>Status:</strong> <span id="modalStatus"></span></p>
+											</div>
+										</div>
+
+										<div class="row mb-3">
+											<div class="col-md-6">
+												<p><strong>Car Type:</strong> <span id="modalCarType"></span></p>
+											</div>
+											<div class="col-md-6">
+												<p><strong>Car Model:</strong> <span id="modalCarModel"></span></p>
+											</div>
+										</div>
+<br>
+										<div class="mb-3">
+											<strong class="fw-bold">Mechanics & Specialties:</strong>
+											<ul id="modalMechanicList" class="list-group"></ul>
+										</div>
+
+										<div class="mb-3">
+											<strong class="fw-bold">Services:</strong>
+											<ul id="modalServiceList" class="list-group"></ul>
+										</div>
+
+										<div class="text-center mt-4">
+											<small class="text-muted">Autofix Garage - <?= date('Y') ?></small>
+										</div>
 									</div>
-									<!--<div class="modal-footer">
-										<button type="button" id="closebtn" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-									</div> -->
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+										<button type="button" class="btn btn-primary" id="printBtn">Print</button>
+									</div>
 								</div>
 							</div>
 						</div>
 
+						<!-- Updated print script -->
 						<script>
-							const mechanics = [{
-									name: "Jose Reyes",
-									specialty: "Engine Repair, Brake Systems"
-								},
-								{
-									name: "Carlos Dela Cruz",
-									specialty: "Transmission, Suspension"
-								},
-								{
-									name: "Maria Santos",
-									specialty: "Electrical Systems, AC Repair"
-								},
-								{
-									name: "Antonio Garcia",
-									specialty: "Oil Change, Tire Rotation"
-								},
-								{
-									name: "Juanito Lopez",
-									specialty: "Body Work, Painting"
-								},
-								{
-									name: "Liza Torres",
-									specialty: "Hybrid Vehicles, Diagnostics"
-								},
-								{
-									name: "Ernesto Aquino",
-									specialty: "Performance Tuning, Exhaust Systems"
-								},
-								{
-									name: "Ricardo Fernandez",
-									specialty: "Diesel Engines, Heavy Equipment"
-								},
-								{
-									name: "Emilia Bautista",
-									specialty: "Battery Services, Wiring"
-								},
-								{
-									name: "Dante Villanueva",
-									specialty: "Cooling Systems, Radiators"
-								}
-							];
+							document.getElementById('printBtn').addEventListener('click', function() {
+								// Get the printable content
+								const printableContent = document.getElementById('printableContent').innerHTML;
 
+								// Create a new window for printing
+								const printWindow = window.open('', '_blank');
+
+								// Write the print content
+								printWindow.document.write(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Schedule Details</title>
+                <style>
+                    body { font-family: Arial, sans-serif; margin: 20px; }
+                    h3 { color: #333; border-bottom: 2px solid #333; padding-bottom: 5px; }
+                    p { margin: 5px 0; }
+                    .fw-bold { font-weight: bold; }
+                    .list-group { list-style-type: none; padding-left: 0; }
+                    .list-group li { padding: 5px 0; border-bottom: 1px solid #eee; }
+                    .text-center { text-align: center; }
+                    .text-muted { color: #6c757d; }
+                </style>
+            </head>
+            <body>
+                <h3>Schedule Details - Autofix Garage</h3>
+                ${printableContent}
+                <script>
+                    window.onload = function() {
+                        window.print();
+                        window.close();
+                    };
+                <\/script>
+            </body>
+            </html>
+        `);
+
+								printWindow.document.close();
+							});
+
+							// Update your view button click handler to set all the data
 							$('.view-btn').on('click', function() {
 								let name = $(this).data('name');
 								let contact = $(this).data('contact');
@@ -308,10 +334,69 @@
 								let type = $(this).data('type');
 								let model = $(this).data('model');
 								let status = $(this).data('status');
-								let mechanic = $(this).data('mechanic');
+								let mechanicData = $(this).data('mechanic');
 
-								let selectedMechanic = mechanics.find(m => m.name === mechanic);
-								let specialty = selectedMechanic ? selectedMechanic.specialty : "N/A";
+								$('#modalName').text(name || 'N/A');
+								$('#modalContact').text(contact || 'N/A');
+								$('#modalAddress').text(address || 'N/A');
+								$('#modalDate').text(datefrom || 'N/A');
+								$('#modalTime').text(timefrom || 'N/A');
+								$('#modalCarType').text(type || 'N/A');
+								$('#modalCarModel').text(model || 'N/A');
+								$('#modalStatus').text(status || 'N/A');
+
+								// Mechanics
+								let mechanicNames = mechanicData ? mechanicData.split(',').map(m => m.trim()) : [];
+								$('#modalMechanicList').empty();
+								if (mechanicNames.length > 0) {
+									mechanicNames.forEach(name => {
+										const found = mechanics.find(m => m.name === name);
+										const specialty = found ? found.specialty : 'Unknown specialty';
+										$('#modalMechanicList').append(`<li><strong>${name}</strong> - ${specialty}</li>`);
+									});
+								} else {
+									$('#modalMechanicList').append('<li>No mechanics assigned</li>');
+								}
+
+								// Services
+								$('#modalServiceList').empty();
+								if (dow) {
+									var serviceList = dow.split(',');
+									serviceList.forEach(function(service) {
+										$('#modalServiceList').append('<li>' + service.trim() + '</li>');
+									});
+								} else {
+									$('#modalServiceList').append('<li>No services listed</li>');
+								}
+							});
+						</script>
+
+						<script>
+							const mechanicURL = window.location.origin + window.location.pathname + '/../api/mechanics';
+							let mechanics = [];
+
+							// Fetch mechanics once and store globally
+							fetch(mechanicURL)
+								.then(response => response.json())
+								.then(data => {
+									mechanics = data;
+								})
+								.catch(error => {
+									console.error('Error fetching mechanics:', error);
+								});
+
+							// Show modal with dynamic data
+							$('.view-btn').on('click', function() {
+								let name = $(this).data('name');
+								let contact = $(this).data('contact');
+								let address = $(this).data('address');
+								let datefrom = $(this).data('datefrom');
+								let timefrom = $(this).data('timefrom');
+								let dow = $(this).data('dow');
+								let type = $(this).data('type');
+								let model = $(this).data('model');
+								let status = $(this).data('status');
+								let mechanicData = $(this).data('mechanic');
 
 								$('#modalName').text(name);
 								$('#modalContact').text(contact);
@@ -320,9 +405,17 @@
 								$('#modalCarType').text(type);
 								$('#modalCarModel').text(model);
 								$('#modalStatus').text(status);
-								$('#modalMechanic').text(mechanic);
-								$('#modalSpecialty').text(specialty);
 
+								// Mechanics
+								let mechanicNames = mechanicData ? mechanicData.split(',').map(m => m.trim()) : [];
+								$('#modalMechanicList').empty();
+								mechanicNames.forEach(name => {
+									const found = mechanics.find(m => m.name === name);
+									const specialty = found ? found.specialty : 'Unknown';
+									$('#modalMechanicList').append(`<li>${name} - ${specialty}</li>`);
+								});
+
+								// Services
 								if (dow) {
 									var serviceList = dow.split(',');
 									$('#modalServiceList').empty();
@@ -336,10 +429,10 @@
 								$('#scheduleModal').modal('show');
 							});
 
+							// Clear modal on close
 							$('#scheduleModal').on('hidden.bs.modal', function() {
-								$('#modalName, #modalContact, #modalAddress, #modalSchedule, #modalService, #modalStatus, #modalCarType, #modalCarModel, #modalMechanic').text('');
-								$('#modalServiceList').empty();
-
+								$('#modalName, #modalContact, #modalAddress, #modalSchedule, #modalStatus, #modalCarType, #modalCarModel').text('');
+								$('#modalMechanicList, #modalServiceList').empty();
 								removeBackdrop();
 							});
 
@@ -349,12 +442,8 @@
 									backdrop.remove();
 								});
 							}
-
-							$('#closebtn').on('click', function() {
-								$('#scheduleModal').modal('hide');
-								removeBackdrop();
-							});
 						</script>
+
 
 						<!-- Modal for Approving Schedule -->
 						<div id="approveModal" class="modal">

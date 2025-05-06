@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 09, 2025 at 07:22 PM
+-- Generation Time: May 06, 2025 at 10:57 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.5
 
@@ -76,7 +76,15 @@ INSERT INTO `employee` (`emp_id`, `lname`, `fname`, `mname`, `address`, `contact
 (10042, 'Daniel', 'Magee', 'Tatyana Sloan', 'Non consectetur vit', '+1 (691) 758-60', 'hyqari@mailinator.com', '2025-03-09 17:14:25', NULL, NULL, NULL, '2025-03-09 05:17:47', 10042, 1, 3),
 (10043, 'Hurst', 'Noble', 'Channing Perez', 'Iure nihil architect', '+1 (851) 758-88', 'wemisocyku@mailinator.com', '2025-03-09 17:35:34', NULL, NULL, NULL, NULL, NULL, 0, 2),
 (10044, 'Pittman', 'Owen', 'Harper Moss', 'Facilis in nisi cumq', '+1 (447) 901-91', 'webuqoleq@mailinator.com', '2025-03-09 17:50:08', NULL, NULL, NULL, NULL, NULL, 0, 2),
-(10045, 'Calderon', 'Wallace', 'Leah Norton', 'Ad quaerat mollitia', '+1 (669) 345-14', 'kibid@mailinator.com', '2025-03-09 18:13:08', NULL, NULL, NULL, NULL, NULL, 0, 2);
+(10045, 'Calderon', 'Wallace', 'Leah Norton', 'Ad quaerat mollitia', '+1 (669) 345-14', 'kibid@mailinator.com', '2025-03-09 18:13:08', NULL, NULL, NULL, NULL, NULL, 0, 2),
+(10046, 'Solis', 'Kermit', 'Velma Burks', 'Dolore illo ea alias', '+1 (288) 231-49', 'danyguqysu@mailinator.com', '2025-03-10 07:21:21', NULL, NULL, NULL, NULL, NULL, 0, 2),
+(10047, 'Williams', 'Deacon', 'Vernon Randall', 'Magni culpa recusan', '+1 (672) 971-86', 'saveletez@mailinator.com', '2025-03-10 07:22:48', NULL, NULL, NULL, NULL, NULL, 0, 2),
+(10048, 'Washington', 'Vernon', 'Nero Burton', 'Esse est obcaecati', '+1 (371) 752-20', 'noxuwof@mailinator.com', '2025-03-10 07:46:30', NULL, NULL, NULL, NULL, NULL, 0, 2),
+(10049, 'Reese', 'Tatyana', 'Noelle Collins', 'Velit esse consequa', '+1 (397) 944-33', 'impaulintech@gmail.com', '2025-03-10 08:02:07', NULL, NULL, NULL, NULL, NULL, 0, 2),
+(10050, 'Pena', 'Wynne', 'Hector Simon', 'Est nihil irure alia', '+1 (863) 359-76', 'garageautofix022@gmail.com', '2025-03-16 16:51:54', NULL, NULL, NULL, NULL, NULL, 0, 2),
+(10051, 'Wagner', 'Wynter', 'Bradley Gonzalez', 'Nemo duis dolor sed', '+1 (538) 631-16', 'tuzulex@mailinator.com', '2025-03-16 16:53:54', NULL, NULL, NULL, NULL, NULL, 0, 2),
+(10052, 'Baldwin', 'Hedda', 'Idola Gutierrez', 'Nostrud autem ipsam', '+1 (392) 451-47', 'garageautofix022+test_user@gmail.com', '2025-03-16 16:54:20', NULL, NULL, NULL, NULL, NULL, 0, 2),
+(10053, 'Foreman', 'Reed', 'Isaac May', 'Et occaecat nesciunt', '+1 (668) 937-31', 'doctor@getnada.com', '2025-05-06 08:19:42', NULL, NULL, NULL, NULL, NULL, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -147,6 +155,36 @@ CREATE TABLE `ismaintenance` (
 
 INSERT INTO `ismaintenance` (`id`, `status`) VALUES
 (1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `mechanics`
+--
+
+CREATE TABLE `mechanics` (
+  `mechanic_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `specialty` varchar(255) NOT NULL,
+  `is_deleted` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `mechanics`
+--
+
+INSERT INTO `mechanics` (`mechanic_id`, `name`, `specialty`, `is_deleted`) VALUES
+(1, 'Jose Reyes', 'Engine Repair, Brake Systems', 0),
+(2, 'Carlos Dela Cruz', 'Transmission, Suspension', 0),
+(3, 'Maria Santos', 'Electrical Systems, AC Repair', 0),
+(4, 'Antonio Garcia', 'Oil Change, Tire Rotation', 0),
+(5, 'Juanito Lopez', 'Body Work, Painting', 0),
+(6, 'Liza Torres', 'Hybrid Vehicles, Diagnostics', 0),
+(7, 'Ernesto Aquino', 'Performance Tuning, Exhaust Systems', 0),
+(8, 'Ricardo Fernandez', 'Diesel Engines, Heavy Equipment', 0),
+(9, 'Emilia Bautista', 'Battery Services, Wiring', 0),
+(10, 'Dante Villanueva', 'Cooling Systems, Radiators', 0),
+(11, 'Jose Reyes2', '222', 1);
 
 -- --------------------------------------------------------
 
@@ -341,7 +379,61 @@ CREATE TABLE `schedules` (
 
 INSERT INTO `schedules` (`id`, `user_id`, `full_name`, `dow`, `date_from`, `date_to`, `time_from`, `time_to`, `status`, `mechanic`, `type`, `model`) VALUES
 (33, 10043, 'Hurst Noble', 'Injector Testing and Cleaning - ₱1800, Wheel Alignment - ₱800, Brake and Suspension Services - ₱1200', '2025-03-10', '2025-03-10', '05:12:00', '05:12:00', 2, 'Ricardo Fernandez', 'automatic', 'Vios'),
-(39, 10045, 'Calderon Wallace', 'OBD Scanning - ₱500, Electronic Troubleshooting - ₱1200, ECU Remapping - ₱3000, DPF, DPD, EGR Removal - ₱2500, Engine Overhauling - ₱7000, Wheel Alignment - ₱800, Wheel Balancing - ₱500, Ceramic Coating - ₱5000, Underwash - ₱350', '2018-06-12', '2018-06-12', '06:33:00', '06:33:00', 0, 'Maria Santos', 'automatic', 'Vios');
+(39, 10045, 'Calderon Wallace', 'OBD Scanning - ₱500, Electronic Troubleshooting - ₱1200, ECU Remapping - ₱3000, DPF, DPD, EGR Removal - ₱2500, Engine Overhauling - ₱7000, Wheel Alignment - ₱800, Wheel Balancing - ₱500, Ceramic Coating - ₱5000, Underwash - ₱350', '2018-06-12', '2018-06-12', '06:33:00', '06:33:00', 1, 'Maria Santos', 'automatic', 'Vios'),
+(40, 10047, 'Williams Deacon', 'OBD Scanning - ₱500, Computer Box Repair - ₱1500, ECU Remapping - ₱3000, DPF, DPD, EGR Removal - ₱2500, Transmission Overhauling - ₱6000, Engine Overhauling - ₱7000, Injector Testing and Cleaning - ₱1800, Wheel Alignment - ₱800, Vulcanizing - ₱300, Oil Change - ₱700, Detailing - ₱2500, Ceramic Coating - ₱5000', '2008-04-23', '2008-04-23', '03:42:00', '03:42:00', 2, 'Dante Villanueva', '', ''),
+(41, 10047, 'Williams Deacon', 'DPF, DPD, EGR Removal - ₱2500, Transmission Overhauling - ₱6000, Engine Overhauling - ₱7000, Injector Testing and Cleaning - ₱1800, Brake and Suspension Services - ₱1200, Vulcanizing - ₱300, Oil Change - ₱700, Ceramic Coating - ₱5000', '1983-10-01', '1983-10-01', '00:17:00', '00:17:00', 0, 'Ricardo Fernandez', '', ''),
+(42, 10047, 'Williams Deacon', 'Electronic Troubleshooting - ₱1200, DPF, DPD, EGR Removal - ₱2500, Engine Overhauling - ₱7000, Injector Testing and Cleaning - ₱1800, Wheel Alignment - ₱800, Brake and Suspension Services - ₱1200, Vulcanizing - ₱300, Car Wash - ₱400, Underwash - ₱350', '2020-04-20', '2020-04-20', '18:18:00', '18:18:00', 0, 'Emilia Bautista', '', ''),
+(71, 10049, 'Reese Tatyana', 'Electronic Troubleshooting - ₱1200, Wheel Balancing - ₱500, Vulcanizing - ₱300, Oil Change - ₱700, Detailing - ₱2500, Ceramic Coating - ₱5000', '1997-12-04', '1997-12-04', '10:56:00', '10:56:00', 1, 'Carlos Dela Cruz', '', ''),
+(72, 10049, 'Reese Tatyana', 'Engine Overhauling - ₱7000, Wheel Balancing - ₱500, Oil Change - ₱700, Detailing - ₱2500, Ceramic Coating - ₱5000, Underwash - ₱350', '1981-08-07', '1981-08-07', '15:21:00', '15:21:00', 1, 'Liza Torres', '', ''),
+(73, 10049, 'Reese Tatyana', 'OBD Scanning - ₱500, Electronic Troubleshooting - ₱1200, ECU Remapping - ₱3000, Transmission Overhauling - ₱6000, Engine Overhauling - ₱7000, Injector Testing and Cleaning - ₱1800, Wheel Balancing - ₱500, Vulcanizing - ₱300', '1977-11-14', '1977-11-14', '02:57:00', '02:57:00', 2, 'Emilia Bautista', '', ''),
+(74, 10049, 'Reese Tatyana', 'Electronic Troubleshooting - ₱1200, ECU Remapping - ₱3000, DPF, DPD, EGR Removal - ₱2500, Transmission Overhauling - ₱6000, Wheel Alignment - ₱800, Brake and Suspension Services - ₱1200, Detailing - ₱2500, Underwash - ₱350', '1988-03-01', '1988-03-01', '23:32:00', '23:32:00', 2, 'Antonio Garcia', '', ''),
+(75, 10049, 'Reese Tatyana', 'OBD Scanning - ₱500, Injector Testing and Cleaning - ₱1800, Wheel Balancing - ₱500, Brake and Suspension Services - ₱1200, Detailing - ₱2500, Underwash - ₱350', '1998-06-03', '1998-06-03', '01:54:00', '01:54:00', 2, 'Juanito Lopez', '', ''),
+(76, 10049, 'Reese Tatyana', 'OBD Scanning - ₱500, DPF, DPD, EGR Removal - ₱2500, Engine Overhauling - ₱7000, Wheel Alignment - ₱800, Wheel Balancing - ₱500, Brake and Suspension Services - ₱1200, Detailing - ₱2500, Car Wash - ₱400, Ceramic Coating - ₱5000, Underwash - ₱350', '1999-11-27', '1999-11-27', '11:48:00', '11:48:00', 1, 'Antonio Garcia', '', ''),
+(77, 10049, 'Reese Tatyana', 'OBD Scanning - ₱500, DPF, DPD, EGR Removal - ₱2500, Engine Overhauling - ₱7000, Injector Testing and Cleaning - ₱1800, Wheel Alignment - ₱800, Brake and Suspension Services - ₱1200, Oil Change - ₱700, Underwash - ₱350', '2024-05-01', '2024-05-01', '07:58:00', '07:58:00', 0, 'Maria Santos', '', ''),
+(78, 10049, 'Reese Tatyana', 'Electronic Troubleshooting - ₱1200, ECU Remapping - ₱3000, DPF, DPD, EGR Removal - ₱2500, Injector Testing and Cleaning - ₱1800, Oil Change - ₱700, Detailing - ₱2500, Car Wash - ₱400', '2025-03-16', '2025-03-16', '13:08:00', '13:08:00', 2, 'Dante Villanueva', '', ''),
+(79, 10053, 'Foreman Reed', 'OBD Scanning - ₱500, Computer Box Repair - ₱1500, Electronic Troubleshooting - ₱1200', '2025-05-22', '2025-05-22', '05:24:00', '05:24:00', 1, 'Jose Reyes', '', ''),
+(80, 10053, 'Foreman Reed', 'Transmission Overhauling - ₱6000, Engine Overhauling - ₱7000, Injector Testing and Cleaning - ₱1800, Wheel Balancing - ₱500, Oil Change - ₱700, Car Wash - ₱400', '2025-05-06', '2025-05-06', '04:57:00', '04:57:00', 0, 'Jose Reyesz', '', ''),
+(81, 10053, 'Foreman Reed', 'Electronic Troubleshooting, DPF, DPD, EGR Removal, Injector Testing and Cleaning, Brake and Suspension Services, Vulcanizing, Detailing, Ceramic Coating, test2', '2025-05-06', '2025-05-06', '22:00:00', '22:00:00', 0, 'Carlos Dela Cruz, Maria Santos, Antonio Garcia, Juanito Lopez, Ernesto Aquino, Emilia Bautista, Dante Villanueva', '', ''),
+(82, 10053, 'Foreman Reed', 'OBD Scanning, DPF, DPD, EGR Removal, Engine Overhauling, Wheel Alignment, Wheel Balancing, Brake and Suspension Services, Detailing, Underwash, test2', '2025-05-06', '2025-05-06', '10:26:00', '10:26:00', 0, 'Maria Santos, Juanito Lopez, Liza Torres, Ricardo Fernandez, Emilia Bautista', '', ''),
+(83, 10053, 'Foreman Reed', 'Computer Box Repair, ECU Remapping, DPF, DPD, EGR Removal, Injector Testing and Cleaning', '2025-05-06', '2025-05-06', '06:18:00', '06:18:00', 0, 'Ricardo Fernandez', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services`
+--
+
+CREATE TABLE `services` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `services`
+--
+
+INSERT INTO `services` (`id`, `name`, `price`, `created_at`, `updated_at`) VALUES
+(1, 'OBD Scanning', 500.00, '2025-05-06 07:07:49', '2025-05-06 07:07:49'),
+(2, 'Computer Box Repair', 1500.00, '2025-05-06 07:07:49', '2025-05-06 07:07:49'),
+(3, 'Electronic Troubleshooting', 1200.00, '2025-05-06 07:07:49', '2025-05-06 07:07:49'),
+(4, 'ECU Remapping', 3000.00, '2025-05-06 07:07:49', '2025-05-06 07:07:49'),
+(5, 'DPF, DPD, EGR Removal', 2500.00, '2025-05-06 07:07:49', '2025-05-06 07:07:49'),
+(6, 'Transmission Overhauling', 6000.00, '2025-05-06 07:07:49', '2025-05-06 07:07:49'),
+(7, 'Engine Overhauling', 7000.00, '2025-05-06 07:07:49', '2025-05-06 07:07:49'),
+(8, 'Injector Testing and Cleaning', 1800.00, '2025-05-06 07:07:49', '2025-05-06 07:07:49'),
+(9, 'Wheel Alignment', 800.00, '2025-05-06 07:07:49', '2025-05-06 07:07:49'),
+(10, 'Wheel Balancing', 500.00, '2025-05-06 07:07:49', '2025-05-06 07:07:49'),
+(11, 'Brake and Suspension Services', 1200.00, '2025-05-06 07:07:49', '2025-05-06 07:07:49'),
+(12, 'Vulcanizing', 300.00, '2025-05-06 07:07:49', '2025-05-06 07:07:49'),
+(13, 'Oil Change', 700.00, '2025-05-06 07:07:49', '2025-05-06 07:07:49'),
+(14, 'Detailing', 2500.00, '2025-05-06 07:07:49', '2025-05-06 07:07:49'),
+(15, 'Car Wash', 400.00, '2025-05-06 07:07:49', '2025-05-06 07:07:49'),
+(16, 'Ceramic Coating', 5000.00, '2025-05-06 07:07:49', '2025-05-06 07:07:49'),
+(17, 'Underwash', 350.00, '2025-05-06 07:07:49', '2025-05-06 07:07:49'),
+(21, 'test2', 111.00, '2025-05-06 07:42:29', '2025-05-06 07:56:54');
 
 -- --------------------------------------------------------
 
@@ -397,7 +489,15 @@ INSERT INTO `user` (`user_id`, `username`, `password`, `lastLogin`, `createdAt`,
 (1129, 'sidozebyze', 'sidozebyze', NULL, '2025-03-09 17:14:25', NULL, NULL, NULL, NULL, NULL, 0, 1, 10024),
 (1131, 'xequmotaky', 'xequmotaky', NULL, '2025-03-09 17:50:08', NULL, NULL, NULL, NULL, NULL, 0, 0, 10044),
 (1132, 'derawabuje', 'derawabuje', NULL, '2025-03-09 17:35:34', NULL, NULL, NULL, NULL, NULL, 0, 1, 10043),
-(10044, 'patofigyso', 'patofigyso', NULL, '2025-03-09 18:13:08', NULL, NULL, NULL, NULL, NULL, 0, 1, 10045);
+(10044, 'patofigyso', 'patofigyso', NULL, '2025-03-09 18:13:08', NULL, NULL, NULL, NULL, NULL, 0, 1, 10045),
+(10045, 'fipejawoc', 'fipejawoc', NULL, '2025-03-10 07:21:21', NULL, NULL, NULL, NULL, NULL, 0, 1, 10046),
+(10047, 'veligoxeb', 'veligoxeb', NULL, '2025-03-10 07:22:48', NULL, NULL, NULL, NULL, NULL, 0, 1, 10047),
+(10048, 'koregaxi', 'koregaxi', NULL, '2025-03-10 07:46:30', NULL, NULL, NULL, NULL, NULL, 0, 1, 10048),
+(10049, 'lukojexaja', 'lukojexaja', NULL, '2025-03-10 08:02:07', NULL, NULL, NULL, NULL, NULL, 0, 1, 10049),
+(10050, 'qyqitysyx', 'Pa$$w0rd!', NULL, '2025-03-16 16:51:54', NULL, NULL, NULL, NULL, NULL, 0, 1, 10050),
+(10051, 'benyfuviry', 'Pa$$w0rd!', NULL, '2025-03-16 16:53:54', NULL, NULL, NULL, NULL, NULL, 0, 1, 10051),
+(10052, 'rytaduwek', 'Pa$$w0rd!', NULL, '2025-03-16 16:54:20', NULL, NULL, NULL, NULL, NULL, 0, 1, 10052),
+(10053, 'humyb', 'Pa$$w0rd!', NULL, '2025-05-06 08:19:42', NULL, NULL, NULL, NULL, NULL, 0, 1, 10053);
 
 -- --------------------------------------------------------
 
@@ -451,6 +551,12 @@ ALTER TABLE `ismaintenance`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `mechanics`
+--
+ALTER TABLE `mechanics`
+  ADD PRIMARY KEY (`mechanic_id`);
+
+--
 -- Indexes for table `members`
 --
 ALTER TABLE `members`
@@ -493,6 +599,13 @@ ALTER TABLE `schedules`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `services`
+--
+ALTER TABLE `services`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_service_name` (`name`);
+
+--
 -- Indexes for table `trainers`
 --
 ALTER TABLE `trainers`
@@ -519,7 +632,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `emp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10046;
+  MODIFY `emp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10054;
 
 --
 -- AUTO_INCREMENT for table `health`
@@ -538,6 +651,12 @@ ALTER TABLE `illness`
 --
 ALTER TABLE `ismaintenance`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `mechanics`
+--
+ALTER TABLE `mechanics`
+  MODIFY `mechanic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `members`
@@ -573,7 +692,13 @@ ALTER TABLE `registration_info`
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+
+--
+-- AUTO_INCREMENT for table `services`
+--
+ALTER TABLE `services`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `trainers`
@@ -585,7 +710,7 @@ ALTER TABLE `trainers`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10045;
+  MODIFY `user_id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10054;
 
 --
 -- AUTO_INCREMENT for table `users`

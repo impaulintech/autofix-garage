@@ -1,4 +1,12 @@
 <?php
+require 'PHPMail/src/PHPMailer.php';
+require 'PHPMail/src/SMTP.php';
+require 'PHPMail/src/Exception.php';
+
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 class Login extends CI_Controller
 {
 	public function __construct()
@@ -18,6 +26,87 @@ class Login extends CI_Controller
 	}
 
 
+
+	function sendLoginEmail($recipientEmail, $recipientName, $isAdmin = false)
+	{
+		$mail = new PHPMailer(true);
+
+		try {
+			$mail->isSMTP();
+			$mail->Host = 'smtp.gmail.com';
+			$mail->SMTPAuth = true;
+			$mail->Username = 'garageautofix022@gmail.com';
+			$mail->Password = 'wiuafhorurleezig';
+			$mail->SMTPSecure = 'tls';
+			$mail->Port = 587;
+
+			$mail->setFrom('garageautofix022@gmail.com', 'Autofix Garage');
+			$mail->addAddress($recipientEmail, $recipientName);
+			$mail->isHTML(true);
+			$mail->Subject = 'Successful Login Notification';
+
+			// Get login details from server variables
+			$ipAddress = $_SERVER['REMOTE_ADDR'] ?? 'Unknown';
+			$userAgent = $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown';
+
+			// Simplify user agent for better readability
+			$browser = "Unknown Browser";
+			if (strpos($userAgent, 'Firefox') !== false) {
+				$browser = "Mozilla Firefox";
+			} elseif (strpos($userAgent, 'Chrome') !== false) {
+				$browser = "Google Chrome";
+			} elseif (strpos($userAgent, 'Safari') !== false) {
+				$browser = "Apple Safari";
+			} elseif (strpos($userAgent, 'Edge') !== false) {
+				$browser = "Microsoft Edge";
+			} elseif (strpos($userAgent, 'Opera') !== false || strpos($userAgent, 'OPR') !== false) {
+				$browser = "Opera";
+			} elseif (strpos($userAgent, 'MSIE') !== false || strpos($userAgent, 'Trident') !== false) {
+				$browser = "Internet Explorer";
+			}
+
+			$greeting = $isAdmin ? "Hello, Admin $recipientName!" : "Hello, $recipientName!";
+			$introText = $isAdmin ? "There was a successful login to your admin account." : "There was a successful login to your account.";
+
+			// Logo URL (replace with your actual logo URL)
+			$logoUrl = 'https://i.imgur.com/GJIFm5F.png';
+
+			$mail->Body = ""
+				. "<div style='font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4;'>"
+				. "<div style='background: white; padding: 20px; border-radius: 10px; max-width: 600px; margin: 0 auto;'>"
+				// Logo section
+				. "<div style='text-align: center; margin-bottom: 20px;'>"
+				. "<center><img align='center' src='$logoUrl' alt='Autofix Garage Logo' style='max-height: 100px;'></center>"
+				. "</div>"
+				// Content section
+				. "<h2 style='color: #5cb85c; margin-top: 0;'>$greeting</h2>"
+				. "<p>$introText Here are the details:</p>"
+				. "<table style='width: 100%; border-collapse: collapse; margin-bottom: 20px;'>"
+				. "<tr><td style='width: 150px; padding: 8px 0;'><b>Login Time:</b></td><td>" . date('Y-m-d H:i:s') . "</td></tr>"
+				. "<tr><td style='width: 150px; padding: 8px 0;'><b>IP Address:</b></td><td>$ipAddress</td></tr>"
+				. "<tr><td style='width: 150px; padding: 8px 0;'><b>Browser:</b></td><td>$browser</td></tr>"
+				. "</table>"
+				. "<div style='background-color: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;'>"
+				. "<p style='text-align: center; color: #777; font-size: 0.9em;'>This is an automated notification. Please do not reply to this email.</p>"
+				. "<p style='text-align: center; margin-top: 20px;'>"
+				. "<a href='mailto:garageautofix022@gmail.com' style='color: #007bff; text-decoration: none;'>Contact Support</a>"
+				. "</p>"
+				. "</div></div>";
+
+			$mail->SMTPOptions = [
+				'ssl' => [
+					'verify_peer' => false,
+					'verify_peer_name' => false,
+					'allow_self_signed' => true,
+				],
+			];
+
+			return $mail->send();
+		} catch (Exception $e) {
+			error_log('Mailer Exception: ' . $e->getMessage());
+			return false;
+		}
+	}
 	public function login()
 	{
 		$this->form_validation->set_rules('username', 'Username', 'trim|required');
@@ -47,6 +136,7 @@ class Login extends CI_Controller
 
 					// Set success notification
 					$this->session->set_flashdata('success', 'Login successful! Welcome back.');
+					$this->sendLoginEmail($result['email'], $result['fname']);
 					redirect('dashboard');
 				} else {
 					$this->session->set_flashdata('error', 'Your account needs approval from admin.');

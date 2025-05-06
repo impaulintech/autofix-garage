@@ -129,14 +129,6 @@
 								</li>
 							</ul>
 						</li>
-						<li class="nav-item">
-							<a href="<?= site_url('health') ?>" class="nav-link">
-								<i class="nav-icon fa-solid fa-file-lines"></i>
-								<p>
-									Schedule Report
-								</p>
-							</a>
-						</li>
 						<!--  <li class="nav-item">
                             <a href="#" data-toggle="modal" data-target="#BackdropHealth" class="nav-link">
                                 <i class="nav-icon fa-solid fa-file-waveform"></i>

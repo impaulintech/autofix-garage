@@ -82,7 +82,6 @@ class ScheduleApi extends CI_Controller
 		}
 	}
 
-
 	public function approve_schedule()
 	{
 		error_reporting(E_ALL);

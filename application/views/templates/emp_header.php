@@ -154,71 +154,71 @@
 							</div>
 							<script>
 								const services = [{
-										name: "OBD Scanning - ₱500",
+										name: "OBD Scanning",
 										price: "₱500"
 									},
 									{
-										name: "Computer Box Repair - ₱1500",
+										name: "Computer Box Repair",
 										price: "₱1500"
 									},
 									{
-										name: "Electronic Troubleshooting - ₱1200",
+										name: "Electronic Troubleshooting",
 										price: "₱1200"
 									},
 									{
-										name: "ECU Remapping - ₱3000",
+										name: "ECU Remapping",
 										price: "₱3000"
 									},
 									{
-										name: "DPF, DPD, EGR Removal - ₱2500",
+										name: "DPF, DPD, EGR Removal",
 										price: "₱2500"
 									},
 									{
-										name: "Transmission Overhauling - ₱6000",
+										name: "Transmission Overhauling",
 										price: "₱6000"
 									},
 									{
-										name: "Engine Overhauling - ₱7000",
+										name: "Engine Overhauling",
 										price: "₱7000"
 									},
 									{
-										name: "Injector Testing and Cleaning - ₱1800",
+										name: "Injector Testing and Cleaning",
 										price: "₱1800"
 									},
 									{
-										name: "Wheel Alignment - ₱800",
+										name: "Wheel Alignment",
 										price: "₱800"
 									},
 									{
-										name: "Wheel Balancing - ₱500",
+										name: "Wheel Balancing",
 										price: "₱500"
 									},
 									{
-										name: "Brake and Suspension Services - ₱1200",
+										name: "Brake and Suspension Services",
 										price: "₱1200"
 									},
 									{
-										name: "Vulcanizing - ₱300",
+										name: "Vulcanizing",
 										price: "₱300"
 									},
 									{
-										name: "Oil Change - ₱700",
+										name: "Oil Change",
 										price: "₱700"
 									},
 									{
-										name: "Detailing - ₱2500",
+										name: "Detailing",
 										price: "₱2500"
 									},
 									{
-										name: "Car Wash - ₱400",
+										name: "Car Wash",
 										price: "₱400"
 									},
 									{
-										name: "Ceramic Coating - ₱5000",
+										name: "Ceramic Coating",
 										price: "₱5000"
 									},
 									{
-										name: "Underwash - ₱350",
+										name: "Underwash",
 										price: "₱350"
 									}
 								];

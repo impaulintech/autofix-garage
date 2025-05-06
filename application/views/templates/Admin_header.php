@@ -129,14 +129,15 @@
 								</li>
 							</ul>
 						</li>
-						<!--  <li class="nav-item">
-                            <a href="#" data-toggle="modal" data-target="#BackdropHealth" class="nav-link">
-                                <i class="nav-icon fa-solid fa-file-waveform"></i>
-                                <p>
-                                    Customer Form
-                                </p>
-                            </a>
-                        </li> -->
+
+						<li class="nav-item">
+							<a href="<?= site_url('service') ?>" class="nav-link">
+								<i class="nav-icon fa-solid fa-table"></i>
+								<p>
+									Services
+								</p>
+							</a>
+						</li>
 						<li class="nav-item">
 							<a href="<?= site_url('login/logout') ?>" class="nav-link">
 								<i class="nav-icon fa-solid fa-right-from-bracket"></i>

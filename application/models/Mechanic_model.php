@@ -29,4 +29,8 @@ class Mechanic_model extends CI_Model
 		$this->db->where('mechanic_id', $id);
 		return $this->db->update('mechanics', ['is_deleted' => 1]);
 	}
+	public function get_all_services()
+	{
+		return $this->db->get('mechanics')->result();
+	}
 }

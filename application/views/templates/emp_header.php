@@ -188,7 +188,7 @@
 							</script>
 
 							<br>
-							
+
 							<div class="row">
 								<div class="col-md-6">
 									<label>Select Mechanics:</label>
@@ -201,75 +201,43 @@
 							</div>
 
 							<script>
-								const mechanics = [{
-										name: "Jose Reyes",
-										specialty: "Engine Repair, Brake Systems"
-									},
-									{
-										name: "Carlos Dela Cruz",
-										specialty: "Transmission, Suspension"
-									},
-									{
-										name: "Maria Santos",
-										specialty: "Electrical Systems, AC Repair"
-									},
-									{
-										name: "Antonio Garcia",
-										specialty: "Oil Change, Tire Rotation"
-									},
-									{
-										name: "Juanito Lopez",
-										specialty: "Body Work, Painting"
-									},
-									{
-										name: "Liza Torres",
-										specialty: "Hybrid Vehicles, Diagnostics"
-									},
-									{
-										name: "Ernesto Aquino",
-										specialty: "Performance Tuning, Exhaust Systems"
-									},
-									{
-										name: "Ricardo Fernandez",
-										specialty: "Diesel Engines, Heavy Equipment"
-									},
-									{
-										name: "Emilia Bautista",
-										specialty: "Battery Services, Wiring"
-									},
-									{
-										name: "Dante Villanueva",
-										specialty: "Cooling Systems, Radiators"
-									}
-								];
-
 								const mechanicCheckboxesContainer = document.getElementById('mechanicCheckboxes');
 								const specialtyList = document.getElementById('specialtyList');
 
-								mechanics.forEach((mechanic, index) => {
-									const div = document.createElement('div');
-									div.className = 'form-check';
+								const mechanicURL = window.location.origin + window.location.pathname + '/../api/mechanics';
 
-									const input = document.createElement('input');
-									input.type = 'checkbox';
-									input.className = 'form-check-input';
-									input.name = 'mechanics[]';
-									input.value = mechanic.name;
-									input.id = `mechanic${index}`;
+								let mechanics = [];
 
-									const label = document.createElement('label');
-									label.className = 'form-check-label';
-									label.htmlFor = `mechanic${index}`;
-									label.textContent = mechanic.name;
+								fetch(mechanicURL)
+									.then(response => response.json())
+									.then(data => {
+										mechanics = data;
+										data.forEach((mechanic, index) => {
+											const div = document.createElement('div');
+											div.className = 'form-check';
 
-									input.addEventListener('change', () => {
-										updateSpecialties();
+											const input = document.createElement('input');
+											input.type = 'checkbox';
+											input.className = 'form-check-input';
+											input.name = 'mechanics[]';
+											input.value = mechanic.name;
+											input.id = `mechanic${index}`;
+
+											const label = document.createElement('label');
+											label.className = 'form-check-label';
+											label.htmlFor = `mechanic${index}`;
+											label.textContent = mechanic.name;
+
+											input.addEventListener('change', updateSpecialties);
+
+											div.appendChild(input);
+											div.appendChild(label);
+											mechanicCheckboxesContainer.appendChild(div);
+										});
+									})
+									.catch(error => {
+										console.error('Error fetching mechanics:', error);
 									});
-
-									div.appendChild(input);
-									div.appendChild(label);
-									mechanicCheckboxesContainer.appendChild(div);
-								});
 
 								function updateSpecialties() {
 									specialtyList.innerHTML = '';
@@ -284,6 +252,7 @@
 									});
 								}
 							</script>
+
 
 							<br>
 							<div class="row">

@@ -66,6 +66,7 @@ $route['api/schedules/cancel_schedule'] = 'ScheduleApi/cancel_schedule';
 $route['register'] = '/register';
 
 $route['api/services'] = 'Service/get_services';
+$route['api/mechanics'] = 'Mechanic/get_services';
 
 $route['mechanic'] = 'Mechanic/index';
 $route['mechanic/add'] = 'Mechanic/add';

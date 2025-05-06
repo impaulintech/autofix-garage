@@ -52,4 +52,11 @@ class Mechanic extends CI_Controller
 		$this->Mechanic_model->delete($id);
 		redirect('mechanic/index');
 	}
+
+	public function get_services()
+	{
+		$this->load->model('Mechanic_model');
+		$services = $this->Mechanic_model->get_all();
+		echo json_encode($services);
+	}
 }

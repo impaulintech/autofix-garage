@@ -140,7 +140,7 @@
 						</li>
 
 						<li class="nav-item">
-							<a href="<?= site_url('service') ?>" class="nav-link">
+							<a href="<?= site_url('mechanic') ?>" class="nav-link">
 								<i class="nav-icon fa-solid fa-user"></i>
 								<p>
 									Mechanics

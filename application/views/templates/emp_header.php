@@ -154,13 +154,12 @@
 							</div>
 
 							<script>
-								const devURL = window.location.origin + window.location.pathname; 
+								const devURL = window.location.origin + window.location.pathname;
 								const servicesContainer = document.getElementById("servicesContainer");
 
 								fetch(devURL + '/../api/services')
 									.then(response => response.json())
 									.then(services => {
-										console.log(services);
 										services.forEach((service, index) => {
 											const serviceDiv = document.createElement("div");
 											serviceDiv.classList.add("form-check");
@@ -189,16 +188,15 @@
 							</script>
 
 							<br>
+							
 							<div class="row">
 								<div class="col-md-6">
-									<label for="mechanic">Select Mechanic:</label>
-									<select class="form-control" name="mechanic" id="mechanic" required>
-										<option value="">Select a mechanic</option>
-									</select>
+									<label>Select Mechanics:</label>
+									<div id="mechanicCheckboxes"></div>
 								</div>
 								<div class="col-md-6">
 									<label>Specialties:</label>
-									<p id="specialtyText" class="text-muted">Select a mechanic to see their specialty.</p>
+									<ul id="specialtyList" class="text-muted pl-3"></ul>
 								</div>
 							</div>
 
@@ -245,20 +243,46 @@
 									}
 								];
 
-								const mechanicSelect = document.getElementById('mechanic');
-								const specialtyText = document.getElementById('specialtyText');
+								const mechanicCheckboxesContainer = document.getElementById('mechanicCheckboxes');
+								const specialtyList = document.getElementById('specialtyList');
 
-								mechanics.forEach(mechanic => {
-									const option = document.createElement('option');
-									option.value = mechanic.name;
-									option.textContent = mechanic.name;
-									mechanicSelect.appendChild(option);
+								mechanics.forEach((mechanic, index) => {
+									const div = document.createElement('div');
+									div.className = 'form-check';
+
+									const input = document.createElement('input');
+									input.type = 'checkbox';
+									input.className = 'form-check-input';
+									input.name = 'mechanics[]';
+									input.value = mechanic.name;
+									input.id = `mechanic${index}`;
+
+									const label = document.createElement('label');
+									label.className = 'form-check-label';
+									label.htmlFor = `mechanic${index}`;
+									label.textContent = mechanic.name;
+
+									input.addEventListener('change', () => {
+										updateSpecialties();
+									});
+
+									div.appendChild(input);
+									div.appendChild(label);
+									mechanicCheckboxesContainer.appendChild(div);
 								});
 
-								mechanicSelect.addEventListener('change', function() {
-									const selectedMechanic = mechanics.find(m => m.name === this.value);
-									specialtyText.innerHTML = selectedMechanic ? `: ${selectedMechanic.specialty}` : "Select a mechanic to see their specialty.";
-								});
+								function updateSpecialties() {
+									specialtyList.innerHTML = '';
+									const selected = document.querySelectorAll('input[name="mechanics[]"]:checked');
+									selected.forEach(checkbox => {
+										const mechanic = mechanics.find(m => m.name === checkbox.value);
+										if (mechanic) {
+											const li = document.createElement('li');
+											li.textContent = `${mechanic.name}: ${mechanic.specialty}`;
+											specialtyList.appendChild(li);
+										}
+									});
+								}
 							</script>
 
 							<br>

@@ -51,6 +51,14 @@ class ScheduleApi extends CI_Controller
 			}
 			$servicesList .= "</ul>";
 
+			$mechanicList = "<ul style='padding: 0px !important'>";
+			$services = explode(", ", $scheduleDetails['mechanic']);
+			foreach ($services as $service) {
+				$service = str_replace("₱", "Php ", $service);
+				$mechanicList .= "<li>$service</li>";
+			}
+			$mechanicList .= "</ul>";
+
 			$mail->Body = ""
 				. "<div style='font-family: Arial, sans-serif; padding: 20px; background-color: #f4f4f4;'>"
 				. "<div style='background: white; padding: 20px; border-radius: 10px;'>"
@@ -60,7 +68,7 @@ class ScheduleApi extends CI_Controller
 				. "<tr><td style='width: 100px;'><b>Date:</b></td><td>{$scheduleDetails['date_from']}</td></tr>"
 				. "<tr><td style='width: 100px;'><b>Time:</b></td><td>{$scheduleDetails['time_from']} - {$scheduleDetails['time_to']}</td></tr>"
 				. "<tr><td style='width: 100px;'><b>Service:</b></td><td>$servicesList</td></tr>"
-				. "<tr><td style='width: 100px;'><b>Assigned Mechanic:</b></td><td>{$scheduleDetails['mechanic']}</td></tr>"
+				. "<tr><td style='width: 100px;'><b>Assigned Mechanic:</b></td><td>{$mechanicList}</td></tr>"
 				. "</table>"
 				. "<p>We appreciate your time and hope to assist you in the future.</p>"
 				. "<p style='text-align: center;'><b>Location:</b> Autofix Garage, Your City</p>"
@@ -158,6 +166,14 @@ class ScheduleApi extends CI_Controller
 			}
 			$servicesList .= "</ul>";
 
+			$mechanicList = "<ul style='padding: 0px !important'>";
+			$services = explode(", ", $scheduleDetails['mechanic']);
+			foreach ($services as $service) {
+				$service = str_replace("₱", "Php ", $service);
+				$mechanicList .= "<li>$service</li>";
+			}
+			$mechanicList .= "</ul>";
+
 			$greeting = $isAdmin ? "Hello, Admin!" : "Hello, $recipientName!";
 			$introText = $isAdmin ? "The following appointment has been cancelled, client: {$scheduleDetails['full_name']}." : "Your scheduled appointment has been cancelled.";
 
@@ -170,7 +186,7 @@ class ScheduleApi extends CI_Controller
 				. "<tr><td style='width: 100px;'><b>Date:</b></td><td>{$scheduleDetails['date_from']}</td></tr>"
 				. "<tr><td style='width: 100px;'><b>Time:</b></td><td>{$scheduleDetails['time_from']} - {$scheduleDetails['time_to']}</td></tr>"
 				. "<tr><td style='width: 100px;'><b>Service:</b></td><td>$servicesList</td></tr>"
-				. "<tr><td style='width: 100px;'><b>Assigned Mechanic:</b></td><td>{$scheduleDetails['mechanic']}</td></tr>"
+				. "<tr><td style='width: 100px;'><b>Assigned Mechanic:</b></td><td>{$mechanicList}</td></tr>"
 				. "</table>"
 				. "<p>" . ($isAdmin ? "Please update records accordingly." : "We apologize for any inconvenience. Feel free to reschedule at your convenience.") . "</p>"
 				. "<p style='text-align: center;'><b>Location:</b> Autofix Garage, Your City</p>"

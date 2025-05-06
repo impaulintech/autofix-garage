@@ -152,101 +152,42 @@
 									<div id="servicesContainer"></div>
 								</div>
 							</div>
-							<script>
-								const services = [{
-										name: "OBD Scanning",
-										price: "₱500"
-									},
-									{
-										name: "Computer Box Repair",
-										price: "₱1500"
-									},
-									{
-										name: "Electronic Troubleshooting",
-										price: "₱1200"
-									},
-									{
-										name: "ECU Remapping",
-										price: "₱3000"
-									},
-									{
-										name: "DPF, DPD, EGR Removal",
-										price: "₱2500"
-									},
-									{
-										name: "Transmission Overhauling",
-										price: "₱6000"
-									},
-									{
-										name: "Engine Overhauling",
-										price: "₱7000"
-									},
-									{
-										name: "Injector Testing and Cleaning",
-										price: "₱1800"
-									},
-									{
-										name: "Wheel Alignment",
-										price: "₱800"
-									},
-									{
-										name: "Wheel Balancing",
-										price: "₱500"
-									},
-									{
-										name: "Brake and Suspension Services",
-										price: "₱1200"
-									},
-									{
-										name: "Vulcanizing",
-										price: "₱300"
-									},
-									{
-										name: "Oil Change",
-										price: "₱700"
-									},
-									{
-										name: "Detailing",
-										price: "₱2500"
-									},
-									{
-										name: "Car Wash",
-										price: "₱400"
-									},
-									{
-										name: "Ceramic Coating",
-										price: "₱5000"
-									},
-									{
-										name: "Underwash",
-										price: "₱350"
-									}
-								];
 
+							<script>
+								const devURL = window.location.origin + window.location.pathname; 
 								const servicesContainer = document.getElementById("servicesContainer");
 
-								services.forEach((service, index) => {
-									const serviceDiv = document.createElement("div");
-									serviceDiv.classList.add("form-check");
+								fetch(devURL + '/../api/services')
+									.then(response => response.json())
+									.then(services => {
+										console.log(services);
+										services.forEach((service, index) => {
+											const serviceDiv = document.createElement("div");
+											serviceDiv.classList.add("form-check");
 
-									const checkbox = document.createElement("input");
-									checkbox.classList.add("form-check-input");
-									checkbox.type = "checkbox";
-									checkbox.name = "services[]";
-									checkbox.value = service.name;
-									checkbox.id = `service${index}`;
+											const checkbox = document.createElement("input");
+											checkbox.classList.add("form-check-input");
+											checkbox.type = "checkbox";
+											checkbox.name = "services[]";
+											checkbox.value = service.name;
+											checkbox.id = `service${index}`;
 
-									const label = document.createElement("label");
-									label.classList.add("form-check-label");
-									label.setAttribute("for", `service${index}`);
-									label.textContent = `${service.name} - ${service.price}`;
+											const label = document.createElement("label");
+											label.classList.add("form-check-label");
+											label.setAttribute("for", `service${index}`);
+											label.textContent = `${service.name} - ₱${service.price}`;
 
-									serviceDiv.appendChild(checkbox);
-									serviceDiv.appendChild(label);
+											serviceDiv.appendChild(checkbox);
+											serviceDiv.appendChild(label);
 
-									servicesContainer.appendChild(serviceDiv);
-								});
+											servicesContainer.appendChild(serviceDiv);
+										});
+									})
+									.catch(error => {
+										console.error('Error fetching services:', error);
+									});
 							</script>
+
 							<br>
 							<div class="row">
 								<div class="col-md-6">
